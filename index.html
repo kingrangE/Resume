@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kilwon Jeon Resume</title>
+    <!-- The English tagline is intentionally localized for its audience and
+         reused in both metadata and the resume header. -->
+    <meta name="description" content="In an AI-driven world, I aim to be the first call when human judgment matters.">
+    <meta property="og:title" content="Kilwon Jeon Resume">
+    <meta property="og:description" content="In an AI-driven world, I aim to be the first call when human judgment matters.">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <main>
+      <header class="이력서-헤더">
+        <div>
+          <h1>전길원 <span lang="en">Kilwon Jeon</span></h1>
+          <p class="소개-문구">
+            In an AI-driven world, I aim to be the first call when human judgment matters.
+          </p>
+        </div>
+        <p class="프로필-요약">
+          0-to-1 product engineer building domain expertise, framing problems,
+          shipping AI from prototype to production, and codifying lessons learned
+          into SOPs.
+        </p>
+        <address class="연락처">
+          <span><span>Phone</span><a href="tel:+821098436764">+82 10-9843-6764</a></span><span><span>Email</span><a href="mailto:kilwon.jeon00@gmail.com">kilwon.jeon00@gmail.com</a></span><span><span>Blog</span><a href="https://kingrang-e.tistory.com/">티스토리 개발 블로그</a></span>
+        </address>
+      </header>
+
+      <section>
+        <h2>경력</h2>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3>FDE 인턴</h3>
+              <p class="소속">솔브레인 AI-TF팀</p>
+            </div>
+            <p class="항목-메타정보">
+              <!-- Non-Seoul domestic locations are intentionally simplified to
+                   Korea for international readers. -->
+              <span class="기간">26.03 – 26.06</span><span class="위치">경기도 분당구</span>
+            </p>
+          </header>
+          <p>
+            <em>사내 보안 환경에서 동작 가능한 AI 솔루션과 STAFF부서 업무 혁신 프로그램을 개발했습니다.</em>
+          </p>
+          <ul>
+            <li>
+            SCM,구매,인재경영팀 등의 STAFF부서 업무 담당자와 미팅을 진행하며 아래의 흐름으로 업무를 진행했습니다.
+                <ul>
+                    <li>개발 전 : 기존 암묵지 업무 프로세스 정리 -> 메뉴얼화 -> 요구사항 정리 -> 유즈케이스 다이어그램 제작</li>
+                    <li>개발 : 기능 단위의 이터레이션 개발을 통해 피드백을 받아 이를 점진적으로 반영하며 애자일하게 진행</li>
+                </ul>
+            </li>
+            <li>
+              chunk와 전체
+                <ul>
+                    <li>실시간 다국어 회의 지원</li>
+                </ul>
+            </li>
+          </ul>
+          <p>
+            <em>Shipped AI transcription for military meetings from prototype to
+              production.</em>
+          </p>
+          <ul aria-label="Military-meeting AI transcription">
+            <li>
+              Secured approval with a minimal solo end-to-end demo; re-architected
+              into web/API/queue/GPU-worker containers for horizontal scaling.
+            </li>
+          </ul>
+        </article>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3>AI Research Engineer 인턴</h3>
+              <p class="소속">WHATsLAB</p>
+            </div>
+            <p class="항목-메타정보">
+              <span class="기간">23.12 - 25.02</span><span class="위치">서울시 서초구</span>
+            </p>
+          </header>
+          <p>
+            <em>Redesigned the model-evaluation platform; shipped an NSFW
+              filter.</em>
+          </p>
+          <ul>
+            <li>
+              Interviews found evaluation code/runtime integration blocked adoption;
+              split tracking from registry: development metrics via API, validated
+              models/final benchmarks on the leaderboard.
+            </li>
+            <li>
+              Used Prefect/Docker to isolate dependencies and queue long evaluations
+              on limited compute, preventing concurrent jobs from skewing latency
+              benchmarks.
+            </li>
+            <li>
+              Shipped an NSFW filter outperforming the incumbent within one month.
+            </li>
+          </ul>
+        </article>
+      </section>
+
+      <section>
+        <h2>수상</h2>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3>우수 소프티어</h3>
+              <p class="소속">소프티어 부트캠프</p>
+            </div>
+            <p class="항목-메타정보">
+              <time datetime="2026-08-31">26.08.31</time>
+            </p>
+          </header>
+          <ul>
+            <li>뉴욕 택시 리스 업체의 객단가 향상을 위한 주행 데이터 기반 차량 추천 대시보드</li>
+            <li>Airflow 기반 데이터 파이프라인 구축하며 데이터 품질 관리를 위해 메달리온 아키텍처 기반으로 레이어별 품질 검증 역할을 분리했습니다. 브론즈와 실버에서는 GX Core 기반의 품질 검증 구조를 구현했고, 골드 레이어는 두 개의 테이블을 결합하는 비즈니스 로직이 존재해 품질 검증 코드를 직접 구현했습니다.</li>
+            <li>SHA-256, Checksum, fingerprint, Airflow Assets 기반으로 멱등성을 구현했습니다.</li>
+            <li>Spark 속도 최적화를 위해 Local Checkpoint 기반의 Lineage 단절과 broadcast join 힌트 명시, Partition 개수 최적화 등을 통해 속도를 기존 대비 70% 이상 단축했습니다.</li>
+          </ul>
+        </article>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3>제 14회 SWAI 해커톤 대상</h3>
+              <p class="소속">세종대학교</p>
+            </div>
+            <p class="항목-메타정보">
+              <time datetime="2026-06-25">26.06.25</time>
+            </p>
+          </header>
+          <ul>
+            <li>개발자 실무 개발 역량 평가 플랫폼</li>
+            <li>개발 AI 활용 역량을 평가하기 위해 5가지 평가 요소를 실제 실무 시나리오 1개로 묶어서 평가하는 구조를 만들었습니다.</li>
+                <ul>
+                    <li>컨텍스트 엔지니어링 : Context Window를 관리하고, Hallucination을 최소화하는 등의 역량 확인</li>
+                    <li>개발 명세 작성 : 구체적인 명세로 AI로부터 일관된 구현 결과를 얻는 역량 확인</li>
+                    <li>구현 오류 검토 : AI가 Hallucination과 같은 모종의 문제로 잘못된 구현을 했을 때 찾아내는 역량 확인</li>
+                    <li>테스트 설계 : AI가 작성한 테스트들만으로 검사하지 못하는 실패 시나리오를 찾아내거나, 잘못된 테스트를 찾아내는 역량 확인</li>
+                    <li>개발 프롬프팅 : 저렴한 AI를 활용하여 고도화된 결과를 구현해낼 수 있는지 역량 확인</li>
+                </ul>
+            <li>개발 프롬프팅, 평가 LLM 등에서 활용할 모델을 선정하기 위해 Rubric 기반의 LLM-as-a-judge 평가 체계를 구축하여 GPT-5.4/4.0/3.5 등을 비교하여 모델을 선정했습니다.</li>
+          </ul>
+        </article>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3>제 10회 SW 코딩경시대회 2위</h3>
+              <p class="소속">세종대학교</p>
+            </div>
+            <p class="항목-메타정보">
+              <time datetime="2025-12-12">25.12.12</time>
+            </p>
+          </header>
+          <ul>
+            <li>교내 SW 전공 3-4학년을 대상으로한 알고리즘 대회에서 Python으로 알고리즘 문제를 해결하며 2등을 달성했습니다.</li>
+          </ul>
+        </article>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3>제 12회 SWAI 해커톤 은상</h3>
+              <p class="소속">세종대학교</p>
+            </div>
+            <p class="항목-메타정보">
+              <time datetime="2025-06-26">25.06.26</time>
+            </p>
+          </header>
+          <ul>
+            <li>초창기 창업자를 위한 창업 가이드 에이전트</li>
+            <li>LangGraph 기반의 ReAct 에이전트를 구축해서 시장 조사, 경쟁사 분석, 아이디어 고도화를 지원하는 제품을 만들었습니다.</li>
+            <li>DuckDuckGo, Google API를 tool로 사용하여 Lean Canvas의 9가지 요소를 채우도록 구현했습니다.</li>
+            <li>각 항목을 생성한 이후 검증 노드에서 평가하는 구조를 만들어 기준 점수 미달 시 실패 사유와 함께 재생성하는 루프를 구현했습니다.(수행 시간은 약 10% 증가, Hallucination 95% 이상 감소, 린캔버스 종합 점수 약 40% 이상 증가)</li>
+          </ul>
+        </article>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3>25-1학기 AI로봇학과 학술제 2위</h3>
+              <p class="소속">세종대학교 AI로봇학과</p>
+            </div>
+            <p class="항목-메타정보">
+              <time datetime="2025-06-24">25.06.24</time>
+            </p>
+          </header>
+          <ul>
+            <li>[수상 설명 작성: 프로젝트 주제, 본인의 역할, 주요 성과를 간단히 적어 주세요.]</li>
+          </ul>
+        </article>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3>제 11회 SWAI 해커톤 은상</h3>
+              <p class="소속">세종대학교</p>
+            </div>
+            <p class="항목-메타정보">
+              <time datetime="2024-12-27">24.12.27</time>
+            </p>
+          </header>
+          <ul>
+            <li>[수상 설명 작성: 프로젝트 주제, 본인의 역할, 주요 성과를 간단히 적어 주세요.]</li>
+          </ul>
+        </article>
+      </section>
+
+      <section>
+        <h2>교육</h2>
+        <ul>
+          <li>
+            <div class="항목-행">
+              <span><strong>소프티어 부트캠프 8기 DE/DA 과정</strong>데이터 엔지니어링(Spark/Hadoop/Airflow) 및 데이터 아키텍트(데이터 모델링/표준화) 심화 학습</span>
+              <span class="항목-메타정보"><span class="기간">26.07-26.08</span></span>
+            </div>
+          </li>
+          <li>
+            <div class="항목-행">
+              <span><strong>세종대학교</strong> 지능기전공학부 스마트기기공학전공
+                3.86/4.5 (전공: 4.12)
+                <!-- The English-facing resume intentionally omits the 2018 start
+                     year and the COVID-era grading caveat: it emphasizes the
+                     expected graduation date, and the local grading context is not
+                     meaningful to its audience. --></span>
+              <span class="항목-메타정보"><span class="기간">20.03-26.08</span></span>
+            </div>
+          </li>
+        </ul>
+      </section>
+       <section>
+        <h2>출판</h2>
+        <ul>
+          <li>
+            <div class="항목-행">
+              <span><strong><a href="https://koreascience.or.kr/article/JAKO202519950404862.page">Evaluating The Openness of Impactful AI Models with A Focus on LLMs</a></strong></span>
+              <span class="항목-메타정보"><span class="기간">한국정보처리학회 TKIPS</span></span>
+            </div>
+          </li>
+          <li>
+            <div class="항목-행">
+              <span><strong><a href="https://koreascience.kr/article/CFKO202520961205222.pub?&lang=ko&orgId=kips">교육 자료 맞춤형 요약을 위한 LLM 기반 에이전트</a></strong></span>
+              <span class="항목-메타정보"><span class="기간">학부생 논문 발표 대회(ASK2025)</span></span>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </main>
+</body>
+</html>
