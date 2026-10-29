@@ -4,27 +4,26 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Kilwon Jeon Resume</title>
-    <!-- The English tagline is intentionally localized for its audience and
-         reused in both metadata and the resume header. -->
-    <meta name="description" content="In an AI-driven world, I aim to be the first call when human judgment matters.">
+    <meta name="description" content="한 줄 소개">
     <meta property="og:title" content="Kilwon Jeon Resume">
-    <meta property="og:description" content="In an AI-driven world, I aim to be the first call when human judgment matters.">
+    <meta property="og:description" content="한 줄 소개">
     <meta property="og:type" content="website">
     <link rel="stylesheet" href="./style.css">
   </head>
   <body>
     <main>
+      <div class="문서-도구">
+        <button type="button" class="PDF-버튼" onclick="window.print()">PDF로 저장</button>
+      </div>
       <header class="이력서-헤더">
         <div>
           <h1>전길원 <span lang="en">Kilwon Jeon</span></h1>
           <p class="소개-문구">
-            In an AI-driven world, I aim to be the first call when human judgment matters.
+            항상 꾸준한 학습을 통해 절대적인 진리가 아닌 상황에 맞는 최선의 정답을 찾고자 하는 개발자 전길원입니다.
           </p>
         </div>
         <p class="프로필-요약">
-          0-to-1 product engineer building domain expertise, framing problems,
-          shipping AI from prototype to production, and codifying lessons learned
-          into SOPs.
+          학부 시절 AI/LLM/Agent 서비스를 개발하며, 좋은 프로덕트는 탄탄한 데이터 기반에서 시작함을 느꼈습니다. 이 경험에서 현재는 LLM, Agent 뿐만 아니라 데이터 처리/적재/품질 관리를 위한 데이터 엔지니어링과 모델링, AI를 개발에 효과적으로 활용하기 위한 하네스 엔지니어링과 Practice AI를 꾸준히 학습하고 있습니다.
         </p>
         <address class="연락처">
           <span><span>Phone</span><a href="tel:+821098436764">+82 10-9843-6764</a></span><span><span>Email</span><a href="mailto:kilwon.jeon00@gmail.com">kilwon.jeon00@gmail.com</a></span><span><span>Blog</span><a href="https://kingrang-e.tistory.com/">티스토리 개발 블로그</a></span>
@@ -40,8 +39,6 @@
               <p class="소속">솔브레인 AI-TF팀</p>
             </div>
             <p class="항목-메타정보">
-              <!-- Non-Seoul domestic locations are intentionally simplified to
-                   Korea for international readers. -->
               <span class="기간">26.03 – 26.06</span><span class="위치">경기도 분당구</span>
             </p>
           </header>
@@ -49,29 +46,26 @@
             <em>사내 보안 환경에서 동작 가능한 AI 솔루션과 STAFF부서 업무 혁신 프로그램을 개발했습니다.</em>
           </p>
           <ul>
-            <li>
-            SCM,구매,인재경영팀 등의 STAFF부서 업무 담당자와 미팅을 진행하며 아래의 흐름으로 업무를 진행했습니다.
+            <li>SCM,구매,인재경영팀 등의 STAFF부서 업무 담당자와 미팅을 진행하며 아래의 흐름으로 업무를 진행했습니다.
                 <ul>
                     <li>개발 전 : 기존 암묵지 업무 프로세스 정리 -> 메뉴얼화 -> 요구사항 정리 -> 유즈케이스 다이어그램 제작</li>
                     <li>개발 : 기능 단위의 이터레이션 개발을 통해 피드백을 받아 이를 점진적으로 반영하며 애자일하게 진행</li>
                 </ul>
             </li>
-            <li>
-              chunk와 전체
-                <ul>
-                    <li>실시간 다국어 회의 지원</li>
-                </ul>
-            </li>
-          </ul>
-          <p>
-            <em>Shipped AI transcription for military meetings from prototype to
-              production.</em>
-          </p>
-          <ul aria-label="Military-meeting AI transcription">
-            <li>
-              Secured approval with a minimal solo end-to-end demo; re-architected
-              into web/API/queue/GPU-worker containers for horizontal scaling.
-            </li>
+            <li>회의 AI 비서 : 그룹사 다국적 임원 회의 배포</li>
+            <ul>
+              <li>실시간 다국어(한,영,일,중) 자막과 회의록 전사 음성 처리 로직을 분리하여 각 비즈니스 로직 별 요구사항을 충족 (실시간 다국어 자막 -> 실시간성, 회의록 전사 -> 완전성)</li>
+            </ul>
+            <li>원자재 구매 가격 분석/예측 대시보드</li>
+            <ul>
+              <li>기존 RPA 기반 데이터 수집을 Airflow 기반 Python 크롤링으로 변경</li>
+              <li>Cloud에서 크롤링 후 Redis Stream 데이터 적재, Local 운영 서버는 주기적으로 Redis Stream에 SSH 접속하여 데이터를 추출 후 Local DB에 적재하는 방식으로 데이터 유실 방지 구현</li>
+            </ul>
+            <li>SAP 생산 실적 기반 실질 BOM 역산 프로그램 (관세 환급용 엑셀 파일 생성)</li>
+            <ul>
+              <li>관세 환급 회계년도 소요량 계산 30 Days/Man 이상 소요되던 업무가 7Days/Man이하로 감소, Human Error 감소로 관세 환급 신청 정확성 향상</li>
+              <li>SAP 표준 BOM 다운로드의 killpid 과정에서 시간이 개당 20초 이상 소요, (총 200개 이상) 이를 해결하기 위해 Main Thread와 Sub Thread로 나눠 메인은 Excel과 관계없이 Script를 동기적 진행, 서브는 백그라운드에서 새로운 Excel을 감지하면 즉시 종료하도록 구현. (RAM 점유율 기존 대비 99% 이상 감소, 동작 속도 또한 약 82% 절감)</li>
+            </ul>
           </ul>
         </article>
         <article class="항목">
@@ -85,23 +79,40 @@
             </p>
           </header>
           <p>
-            <em>Redesigned the model-evaluation platform; shipped an NSFW
-              filter.</em>
+            <em>연구자의 입장에서 가설을 세우고 검증하는 방식의 업무 방식으로 문제를 해결했습니다.</em>
           </p>
           <ul>
-            <li>
-              Interviews found evaluation code/runtime integration blocked adoption;
-              split tracking from registry: development metrics via API, validated
-              models/final benchmarks on the leaderboard.
-            </li>
-            <li>
-              Used Prefect/Docker to isolate dependencies and queue long evaluations
-              on limited compute, preventing concurrent jobs from skewing latency
-              benchmarks.
-            </li>
-            <li>
-              Shipped an NSFW filter outperforming the incumbent within one month.
-            </li>
+            <li>단일 이미지 기반 3D Object 생성 모델 개발</li>
+            <ul>
+              <li>단일 인물 이미지를 입력하면, 움직일 수 있는 3D Object로 변환하는 파이프라인 개발</li>
+              <li>One-2-3-45 모델의 방위각 알고리즘을 개량하여 SSIM 수치를 14% 개선 (0.65 -> 0.74)</li>
+              <ul>
+                <li>전면과 후면 이미지 생성 비율이 2:1(총 12장)이기에 후면 예측 성능이 떨어지고, 전후면 이미지 생성 개수를 늘리고 1:1로 비율을 맞춰주면 예측 성능이 올라갈 것이라는 가설을 세우고 문제를 해결했습니다.</li>
+              </ul>
+              <li>Mediapipe Body Estimation과 bpy 모듈을 함께 사용하여 인물의 관절 좌표를 찾고, Mesh와 Bone을 연결하는 Auto Rigging Algorithm 개발</li>
+            </ul>
+            <li>경도 인지 장애 환자 진단 모델 개발</li>
+            <ul>
+              <li>VR 게임 플레이 데이터를 기반으로 경도 인지 장애 여부를 진단하는 모델</li>
+              <li>환자와 정상인의 게임 플레이 영상을 직접 확인하며 환자와 정상인의 차이를 확인하고 가설 확립 -> 데이터 EDA를 통해 가설 검증</li>
+              <li>검증된 가설을 기반으로 데이터 정제/가공/증강, 모델 선택 진행</li>
+              <ul>
+                <li>데이터 정제 : 환자가 3회 이상 반복 시행하며 디지털 치료제의 성능으로 정상인의 데이터 분포와 가까워짐을 발견 -> 반복 시행 3회 이후의 환자 데이터 삭제</li>
+                <li>데이터 증강 : 데이터를 정제하는 과정에서 전반적인 데이터의 양이 약 200-300건으로 부족해짐 -> 가설을 통해 검증한 게임의 반복적 패턴을 이용하여 Sliding Window 증강 적용, 약 3배 증가</li>
+                <li>데이터 가공 : 가설 검증 과정에서 발견한 주요 차이점(Z축 가속도 등)을 신규 피처로 만들어 도입</li>
+                <li>모델 선택 : 특정 구간이 아닌 시계열 전체와 모든 피처간의 관계를 고려해야 함을 파악 -> Transformer Encoder 기반의 분류 모델로 모델 선정</li>
+              </ul>
+            </ul>
+            <li>sLLM 파인 튜닝 및 백엔드 개발</li>
+            <ul>
+              <li>플레이어의 발표 내용과 발표 자료를 기반으로 고품질 질문 5개를 생성하여 Unity 게임으로 음성 파일을 전달해주는 LLM 백엔드 개발</li>
+              <li>sLLM(<a href="https://huggingface.co/MLP-KTLim/llama-3-Korean-Bllossom-8B">Bllossom-8B</a>) 성능 향상을 위해 두 가지 PEFT 기법 조합 적용(GPT를 이용하여 직접 학습용 데이터셋 구축)</li>
+              <ul>
+                <li>Soft Prompt : sLLM의 지시 이행도가 낮은 문제를 해결하기 위해 도입(지시 이행도 100% 달성)</li>
+                <li>LoRA : sLLM의 답변 품질을 높이기 위해 도입(답변 품질 약 57% 향상)</li>
+              </ul>
+              <li>지시 이행도와 답변 품질을 평가하기 위한 LLM 성능 평가 체계 구축</li>
+            </ul>
           </ul>
         </article>
       </section>
@@ -190,7 +201,21 @@
             </p>
           </header>
           <ul>
-            <li>[수상 설명 작성: 프로젝트 주제, 본인의 역할, 주요 성과를 간단히 적어 주세요.]</li>
+            <li>개인화된 영어 회화 학습 에이전트(보이스봇)</li>
+            <li>개인화된 대화 경험 제공을 위해 아래 2가지 방식 적용</li>
+            <ul>
+              <li>Multi Hop 질문 대응</li>
+              <ul>
+                <li>VectorDB 기반 일반 RAG로는 실제 대화의 Multi Hop 질문에 대응 불가</li>
+                <li>Multi Hop 문제 해결을 위해 논문 탐색, <a href="https://kingrang-e.tistory.com/38">MicroSoft의 GraphRAG 논문</a>을 읽고 프로젝트에 적용</li>
+                <li>25개 Multi Hop 질문 기준 성능 575% 개선 (0.16 -> 0.92)</li>
+              </ul>
+              <li>개인 대화 취향 반영</li>
+              <ul>
+                <li>사용자가 선호하는 말투, 대화 방식을 반영하기 위해 사용자별 System Prompt를 따로 관리, 대화 시작 시 사용자 개인 System Prompt를 기반으로 Agent 동작</li>
+                <li>사용자가 Agent와 대화 이후 별점(1~5, Optional)으로 대화 경험을 평가 -> 5회 이상 누적 -> 이전 버전 복구 or System Prompt 개선</li>
+              </ul>
+            </ul>
           </ul>
         </article>
         <article class="항목">
@@ -204,7 +229,11 @@
             </p>
           </header>
           <ul>
-            <li>[수상 설명 작성: 프로젝트 주제, 본인의 역할, 주요 성과를 간단히 적어 주세요.]</li>
+            <li>세종대학교 백과사전 챗봇(RAG)</li>
+            <li><a href="https://www.sejong.ac.kr/kor/index.do">세종대학교 공식</a>,<a href="https://do.sejong.ac.kr/">행사 관련 페이지</a>,<a href="https://udream.sejong.ac.kr/">취업 관련 페이지</a> 등 교내 정보가 여러 곳으로 파편하되어 있는 문제 해결</li>
+            <li>Airflow, Beautiful Soup 기반의 크롤러를 구현해 일 단위 적재 구조 구성</li>
+            <li>중복 데이터 감지를 위해 글 제목, 작성 일시, 내용을 기반의 SHA-256 해시 중복 검사를 통해 중복 적재 방지하며 변경된 글은 반영되도록 UPSERT</li>
+            <li>정보의 출처와 주제를 미리 범주화해두고, ChromaDB 적재 시 메타데이터로 기재하도록 하여 검색 속도 및 정확도 향상 (검색 속도 약 50% 절감, 정확도 약 41% 향상)</li>
           </ul>
         </article>
       </section>
@@ -226,6 +255,9 @@
                      year and the COVID-era grading caveat: it emphasizes the
                      expected graduation date, and the local grading context is not
                      meaningful to its audience. --></span>
+                     <ul>
+                       <li>2023-1 성적 우수 장학금 3등 (3/220)</li>
+                     </ul>
               <span class="항목-메타정보"><span class="기간">20.03-26.08</span></span>
             </div>
           </li>
@@ -244,6 +276,23 @@
             <div class="항목-행">
               <span><strong><a href="https://koreascience.kr/article/CFKO202520961205222.pub?&lang=ko&orgId=kips">교육 자료 맞춤형 요약을 위한 LLM 기반 에이전트</a></strong></span>
               <span class="항목-메타정보"><span class="기간">학부생 논문 발표 대회(ASK2025)</span></span>
+            </div>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>자격증/어학</h2>
+        <ul>
+          <li>
+            <div class="항목-행">
+              <span><strong>ADsP(데이터분석준전문가)</strong></span>
+              <span class="항목-메타정보"><span class="기간">한국데이터산업진흥원(26.08.28)</span></span>
+            </div>
+          </li>
+          <li>
+            <div class="항목-행">
+              <span><strong>Toeic Speaking IH</strong></span>
+              <span class="항목-메타정보"><span class="기간">한국TOEIC위원회(26.08.15)</span></span>
             </div>
           </li>
         </ul>
