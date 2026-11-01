@@ -355,7 +355,8 @@ section > ul > li + li {
 
   body {
     background: #fff;
-    font-size: 9pt;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 
   main {
@@ -366,54 +367,11 @@ section > ul > li + li {
     border-radius: 0;
   }
 
-  .이력서-헤더 {
-    padding-bottom: 20px;
-  }
-
-  h1 {
-    font-size: 20pt;
-  }
-
-  .소개-문구 {
-    font-size: 13pt;
-  }
-
-  .프로필-요약 {
-    font-size: 11pt;
-  }
-
-  section + section {
-    margin-top: 18px;
-  }
-
-  h2 {
-    margin-bottom: 16px;
-    font-size: 12pt;
-  }
-
-  h3 {
-    font-size: 10pt;
-  }
-
-  .소속, .항목-메타정보 {
-    font-size: 9pt;
-  }
-
-  .항목 + .항목 {
-    margin-top: 18px;
-    padding-top: 18px;
-  }
-
   h2, h3, .항목-헤더 {
     break-after: avoid;
   }
 
   .항목-행, li {
     break-inside: avoid;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
   }
 }
