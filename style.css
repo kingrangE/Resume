@@ -355,6 +355,7 @@ section > ul > li + li {
 
   body {
     background: #fff;
+    zoom: 0.85;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
