@@ -139,9 +139,10 @@
           </header>
           <p><strong>A dashboard helping New York taxi leasing companies identify vehicle upgrade prospects using trip data and estimated driver net income.</strong></p>
           <ul>
-            <li>Changed slot-based candidate generation over 20.9 million trips to deduplicate within arrays before expanding up to 64×, eliminating a deduplication shuffle over up to approximately 1.34 billion rows; verified identical candidate sets with zero differences in both directions.</li>
-            <li>Identified input file contents and recommendation settings with SHA-256 and combined region/month transaction locks with unique constraints, reusing successful versions for identical inputs and loading changed inputs as new versions.</li>
-            <li>Replaced single-summary-row quality checks with Great Expectations validation over the full Spark candidate DataFrame, aggregating null, type, and range violations without collecting the full dataset on the driver.</li>
+            <li>Identified growing Spark execution plans across allocation rounds and truncated lineage with localCheckpoint; maintained identical allocations while reducing runtime from 7.40s to 3.28s (approximately 56%) in a local comparison with 2,000 drivers and three vehicle models.</li>
+            <li>Selectively persisted five reused intermediate results, including enriched trips, driver aggregates, and recommendation candidates, and unpersisted them after use to manage recomputation and memory usage; reduced median computation time from 49.673s to 28.162s (43.3%) in a local comparison over approximately 680,000 trips.</li>
+            <li>Implemented idempotent loading by identifying input file contents and recommendation settings with SHA-256 and combining region/month transaction locks with unique constraints, reusing successful versions for identical inputs and creating new versions only for changed inputs.</li>
+            <li>Used ETag/Last-Modified and internal artifact checks to reprocess only changed or missing inputs; coordinated Airflow to emit one region/month readiness Asset after all selected downstream DAGs succeeded, reducing duplicate Gold runs from individual completion events and computing only after inputs for the same partition were ready.</li>
           </ul>
         </article>
         <article class="항목">
@@ -156,9 +157,9 @@
           </header>
           <p><strong>A platform assessing practical AI-assisted development skills, including instructing AI and verifying generated results.</strong></p>
           <ul>
-            <li>Used LLMs only to match natural-language review items to reference items, calculating Precision/Recall and severity-weighted scores in code to separate semantic judgment from numerical scoring.</li>
-            <li>Built an evaluation harness measuring repeated-grading variation and Cohen’s kappa/MAE against gold labels, with separate analyses for A/B presentation-order reversals and author-model scoring bias.</li>
-            <li>Parallelized independent consensus judgments and boundary checks without reducing judgment counts, cutting evaluation time from 22.1s to 7.4s (approximately 67%) in a single end-to-end measurement.</li>
+            <li>Identified an assessment flaw where meaningless instructions scored approximately 80 because the generator also received the full task brief; restricted generation to candidate instructions while retaining task requirements for the grader so instruction-writing ability influenced generated results and assessment.</li>
+            <li>To reduce variation in numerical LLM grading, limited the model to semantic matching between natural-language review items and reference items; calculated Precision/Recall and severity-weighted scores in code and aggregated across tasks using micro-averages of raw counts.</li>
+            <li>Identified sequential LLM calls for three coverage-consensus judgments and a boundary check as a context-evaluation bottleneck; used ThreadPoolExecutor to parallelize all three judgments and run the boundary check concurrently, preserving judgment counts while reducing a single E2E measurement from 22.1s to 7.4s (approximately 67%).</li>
           </ul>
         </article>
         <article class="항목">
