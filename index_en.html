@@ -137,11 +137,11 @@
               <time datetime="2026-08-31">26.08.31</time>
             </p>
           </header>
+          <p><strong>A dashboard helping New York taxi leasing companies identify vehicle upgrade prospects using trip data and estimated driver net income.</strong></p>
           <ul>
-            <li>Built a vehicle recommendation dashboard using driving data to increase revenue per customer for a New York taxi leasing company.</li>
-            <li>Built an Airflow data pipeline with layer-specific quality validation based on the medallion architecture. Used GX Core for validation in the bronze and silver layers, and implemented custom validation in the gold layer to accommodate business logic that joins two tables.</li>
-            <li>Implemented idempotency using SHA-256, checksums, fingerprints, and Airflow Assets.</li>
-            <li>Reduced Spark execution time by over 70% by truncating lineage with local checkpoints, specifying broadcast join hints, and optimizing partition counts.</li>
+            <li>Changed slot-based candidate generation over 20.9 million trips to deduplicate within arrays before expanding up to 64×, eliminating a deduplication shuffle over up to approximately 1.34 billion rows; verified identical candidate sets with zero differences in both directions.</li>
+            <li>Identified input file contents and recommendation settings with SHA-256 and combined region/month transaction locks with unique constraints, reusing successful versions for identical inputs and loading changed inputs as new versions.</li>
+            <li>Replaced single-summary-row quality checks with Great Expectations validation over the full Spark candidate DataFrame, aggregating null, type, and range violations without collecting the full dataset on the driver.</li>
           </ul>
         </article>
         <article class="항목">
@@ -154,17 +154,11 @@
               <time datetime="2026-06-25">26.06.25</time>
             </p>
           </header>
+          <p><strong>A platform assessing practical AI-assisted development skills, including instructing AI and verifying generated results.</strong></p>
           <ul>
-            <li>Built a platform for evaluating developers' practical software development skills.</li>
-            <li>Combined five assessment areas into a single real-world development scenario to evaluate AI-assisted development skills.</li>
-                <ul>
-                    <li>Context engineering: Assessed the ability to manage context windows and minimize hallucinations.</li>
-                    <li>Specification writing: Assessed the ability to produce consistent AI implementations through detailed specifications.</li>
-                    <li>Implementation review: Assessed the ability to identify incorrect AI implementations caused by hallucinations or other issues.</li>
-                    <li>Test design: Assessed the ability to identify failure scenarios missing from AI-generated tests and detect incorrect tests.</li>
-                    <li>Development prompting: Assessed the ability to achieve sophisticated results using lower-cost AI models.</li>
-                </ul>
-            <li>Built a rubric-based LLM-as-a-judge evaluation framework to compare models including GPT-5.4/4.0/3.5 and select models for development prompting and LLM-based evaluation.</li>
+            <li>Used LLMs only to match natural-language review items to reference items, calculating Precision/Recall and severity-weighted scores in code to separate semantic judgment from numerical scoring.</li>
+            <li>Built an evaluation harness measuring repeated-grading variation and Cohen’s kappa/MAE against gold labels, with separate analyses for A/B presentation-order reversals and author-model scoring bias.</li>
+            <li>Parallelized independent consensus judgments and boundary checks without reducing judgment counts, cutting evaluation time from 22.1s to 7.4s (approximately 67%) in a single end-to-end measurement.</li>
           </ul>
         </article>
         <article class="항목">
@@ -191,11 +185,11 @@
               <time datetime="2025-06-26">25.06.26</time>
             </p>
           </header>
+          <p><strong>An agent helping early-stage founders turn ideas into Lean Canvases supported by market and competitor research.</strong></p>
           <ul>
-            <li>Built a startup guidance agent for early-stage founders.</li>
-            <li>Developed a product with a LangGraph-based ReAct agent to support market research, competitor analysis, and idea refinement.</li>
-            <li>Used DuckDuckGo and Google APIs as tools to populate all nine components of a Lean Canvas.</li>
-            <li>Implemented a validation node to evaluate each generated component and trigger regeneration with failure reasons when scores fell below the threshold. Increased execution time by approximately 10%, reduced hallucinations by over 95%, and improved the overall Lean Canvas score by approximately 40% or more.</li>
+            <li>Decomposed queries into market size, customer problems, and competing alternatives; searched Google and DuckDuckGo in parallel, deduplicated normalized URLs, and reranked titles/snippets with a BGE Cross-Encoder before generation.</li>
+            <li>Built a LangGraph workflow separating facts from hypotheses and validating source presence and token overlap with search snippets; allowed up to two revisions of failed claims, then removed and rechecked claims that still failed.</li>
+            <li>Fixed generated artifacts to separate generation variation from grading variation, measuring repeated-grading variance and error against human labels; recorded winner reversals after swapping A/B order as ties and positional inconsistencies.</li>
           </ul>
         </article>
         <article class="항목">
@@ -208,22 +202,11 @@
               <time datetime="2025-06-24">25.06.24</time>
             </p>
           </header>
+          <p><strong>A personalized AI voicebot that remembers learners’ past conversations and provides English conversation practice and expression correction.</strong></p>
           <ul>
-            <li>Built a personalized English conversation learning agent (voicebot).</li>
-            <li>Applied two approaches to provide personalized conversations:</li>
-            <ul>
-              <li>Multi-hop question answering</li>
-              <ul>
-                <li>Found that standard vector database-based RAG could not handle multi-hop questions in real conversations.</li>
-                <li>Researched approaches to multi-hop reasoning, read <a href="https://kingrang-e.tistory.com/38">Microsoft's GraphRAG paper</a>, and applied it to the project.</li>
-                <li>Improved performance by 575% across 25 multi-hop questions (0.16 → 0.92).</li>
-              </ul>
-              <li>Individual conversation preferences</li>
-              <ul>
-                <li>Maintained a separate system prompt for each user to reflect preferred tone and conversation style, initializing the agent with the user's personalized prompt at the start of each conversation.</li>
-                <li>Collected optional conversation ratings (1–5 stars) after each interaction. After accumulating at least five ratings, reverted to a previous system prompt version or refined the prompt.</li>
-              </ul>
-            </ul>
+            <li>Stored conversations as individual messages, combined up-to-3-hop traversal with Korean/English text search, and reranked by relevance, path length, and recency; improved mean evidence Recall from 4.4% to 70.8% in replay over the same 60-question development set.</li>
+            <li>Implemented a transactional outbox that writes conversation records and graph-indexing jobs in one PostgreSQL transaction, with per-conversation ordering, retries, deduplication, and deletion guards for replay after partial updates.</li>
+            <li>Built a 162-item evaluation suite covering memory retrieval, fabricated memories, multi-turn dialogue, and expression correction; compared 162 outputs per version using the same grader while preserving actual model inputs, retrieved evidence, and prompt versions.</li>
           </ul>
         </article>
         <article class="항목">
@@ -236,12 +219,11 @@
               <time datetime="2024-12-27">24.12.27</time>
             </p>
           </header>
+          <p><strong>A student-facing RAG chatbot answering questions about academic, career, and extracurricular information across campus sites with official sources.</strong></p>
           <ul>
-            <li>Built a Sejong University information chatbot using RAG.</li>
-            <li>Addressed fragmented campus information across <a href="https://www.sejong.ac.kr/kor/index.do">Sejong University's official website</a>, <a href="https://do.sejong.ac.kr/">event pages</a>, <a href="https://udream.sejong.ac.kr/">career pages</a> and other sources.</li>
-            <li>Implemented crawlers using Airflow and Beautiful Soup to load data daily.</li>
-            <li>Prevented duplicate loads using SHA-256 hash checks based on post titles, timestamps, and content, and used UPSERT to reflect updates to existing posts.</li>
-            <li>Precategorized information by source and topic and stored these categories as metadata in ChromaDB, reducing retrieval time by approximately 50% and improving accuracy by approximately 41%.</li>
+            <li>Chunked announcements into body segments of up to 1,600 characters while preserving paragraph/table-row structure, carrying table headers, merged-cell context, titles, and dates into chunks so eligibility conditions remained interpretable after retrieval.</li>
+            <li>Identified chunks by hashes of document metadata and chunk composition plus chunk order; embedded only missing chunks, removed old versions after successful loading, and compared PostgreSQL source records with Chroma indexes to diagnose missing or stale chunks.</li>
+            <li>Restricted generation to sentences and source numbers and assembled URLs from retrieved originals; validated sentence-level citations and skipped generation or withheld answers when retrieval was empty or evidence was insufficient.</li>
           </ul>
         </article>
       </section>
