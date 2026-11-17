@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kilwon Jeon Resume</title>
+    <meta name="description" content="Kilwon Jeon — Developer focused on AI, LLMs, agents, and data engineering.">
+    <meta property="og:title" content="Kilwon Jeon Resume">
+    <meta property="og:description" content="Kilwon Jeon — Developer focused on AI, LLMs, agents, and data engineering.">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <main>
+      <div class="문서-도구">
+        <button type="button" class="PDF-버튼" onclick="window.print()">Save as PDF</button>
+      </div>
+      <header class="이력서-헤더">
+        <div>
+          <h1>Kilwon Jeon</h1>
+          <p class="소개-문구">
+            A developer committed to continuous learning and finding the best solution for each situation rather than seeking an absolute truth.
+          </p>
+        </div>
+        <p class="프로필-요약">
+          Building AI, LLM, and agent services as an undergraduate taught me that great products start with a solid data foundation. Building on this experience, I continue to study not only LLMs and agents, but also data engineering and modeling for data processing, loading, and quality management, as well as harness engineering and practical AI use for effective AI-assisted development.
+        </p>
+        <address class="연락처">
+          <span><span>Phone</span><a href="tel:+821098436764">+82 10-9843-6764</a></span><span><span>Email</span><a href="mailto:kilwon.jeon00@gmail.com">kilwon.jeon00@gmail.com</a></span><span><span>Blog</span><a href="https://kingrang-e.tistory.com/">Technical Blog on Tistory</a></span><span><span>Portfolio</span><a href="https://kingrange.github.io/portfolio/">Portfolio Website</a></span>
+        </address>
+      </header>
+
+      <section>
+        <h2>Experience</h2>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3>FDE Intern</h3>
+              <p class="소속">Soulbrain, AI Task Force</p>
+            </div>
+            <p class="항목-메타정보">
+              <span class="기간">26.03 – 26.06</span><span class="위치">Bundang-gu, Gyeonggi-do, South Korea</span>
+            </p>
+          </header>
+          <p><em>Developed AI services and workflow automation for secure internal environments.</em></p>
+          <ul>
+            <li>Collaborated with stakeholders in corporate support departments, including SCM, Purchasing, and Human Resources, using the following workflow:
+              <ul>
+                <li>Before development: Documented tacit workflows → created manuals → defined requirements → created use case diagrams.</li>
+                <li>During development: Used agile, feature-level iterations to gather feedback and incorporate it incrementally.</li>
+              </ul>
+            </li>
+            <li><strong>AI meeting assistant</strong>: Live captions in four languages and meeting minutes for multinational executive meetings across group companies.
+              <ul>
+                <li>Separated caption latency and transcript completeness requirements: live captions used a bounded queue that discarded stale audio chunks, while meeting transcription processed the full audio recording.</li>
+                <li>Implemented automatic fallback to pyannote and a local LLM for external speech and LLM API outages, with user notification when local processing was also unavailable.</li>
+              </ul>
+            </li>
+            <li><strong>Orecast</strong>: A purchasing analytics dashboard connecting raw material price collection with lead-lag analysis and ML forecasting.
+              <ul>
+                <li>Replaced RPA-based collection with Airflow-orchestrated Python crawlers and standardized material, date, and price records from four public sources, separating site-specific parsers from ingestion logic.</li>
+                <li>Decoupled collection from local database ingestion with Redis Streams to accommodate different server availability; combined ACK after database commit with material/date UPSERTs to prevent duplicate price rows during replay after interruptions.</li>
+              </ul>
+            </li>
+            <li><strong>SAP2BOM</strong>: Automation that derives actual BOMs from SAP production records for customs duty drawback claims.
+              <ul>
+                <li>Topologically sorted multi-level product and intermediate-product dependencies to calculate raw material consumption in order, reducing duty drawback calculation effort from over 30 person-days to 7 person-days or less.</li>
+                <li>Identified Excel startup and termination waits as a bottleneck across more than 200 BOM downloads; separated downloading and Excel cleanup into dedicated threads, reducing execution time by approximately 82% and RAM usage by over 99% for this workflow.</li>
+              </ul>
+            </li>
+            <li><strong>Job competency assessment CBT</strong>: A web platform connecting assessment authoring, test taking, automated grading, and competency analytics.
+              <ul>
+                <li>Replaced full analytics rebuilds with incremental, idempotent ingestion using per-source watermarks and unique constraints, recalculating only affected users and tags; reduced processing time from 11,174ms to 55.2ms (approximately 202× faster) on roughly 20,000 synthetic facts on a development PC.</li>
+                <li>Moved reference-answer and rubric-based LLM grading to RQ jobs after the submission transaction so model response waits did not delay answer storage; implemented pending, graded, and failed states with total-score updates.</li>
+              </ul>
+            </li>
+          </ul>
+        </article>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3>AI Research Engineer Intern</h3>
+              <p class="소속">WHATsLAB</p>
+            </div>
+            <p class="항목-메타정보">
+              <span class="기간">23.12 - 25.02</span><span class="위치">Seocho-gu, Seoul, South Korea</span>
+            </p>
+          </header>
+          <p>
+            <em>Solved problems through a research-driven approach of forming and testing hypotheses.</em>
+          </p>
+          <ul>
+            <li>Developed a model for generating 3D objects from a single image.</li>
+            <ul>
+              <li>Built a pipeline that converts a single image of a person into an animatable 3D object.</li>
+              <li>Improved the azimuth algorithm of the One-2-3-45 model, increasing SSIM by 14% (0.65 → 0.74).</li>
+              <ul>
+                <li>Addressed poor rear-view prediction by testing the hypothesis that the original 2:1 front-to-rear image ratio (12 images in total) was imbalanced, and that generating more images with a 1:1 ratio would improve predictions.</li>
+              </ul>
+              <li>Developed an auto-rigging algorithm using MediaPipe Body Estimation and the bpy module to locate joint coordinates and connect the mesh to bones.</li>
+            </ul>
+            <li>Developed a diagnostic model for mild cognitive impairment.</li>
+            <ul>
+              <li>Built a model to identify mild cognitive impairment from VR gameplay data.</li>
+              <li>Reviewed gameplay videos of patients and healthy participants to identify differences and form hypotheses, then validated them through exploratory data analysis (EDA).</li>
+              <li>Used validated hypotheses to guide data cleaning, feature engineering, augmentation, and model selection.</li>
+              <ul>
+                <li>Data cleaning: Found that patients' data distributions approached those of healthy participants after three or more repeated sessions due to the effects of the digital therapeutic; excluded patient data from sessions beyond the third.</li>
+                <li>Data augmentation: Cleaning left only approximately 200–300 records. Applied sliding-window augmentation using the recurring gameplay patterns validated through hypothesis testing, increasing the dataset size approximately threefold.</li>
+                <li>Feature engineering: Introduced new features based on key differences identified during hypothesis testing, including Z-axis acceleration.</li>
+                <li>Model selection: Selected a Transformer encoder-based classifier to capture relationships across the entire time series and all features, rather than isolated segments.</li>
+              </ul>
+            </ul>
+            <li>Fine-tuned a small language model (sLLM) and developed its backend.</li>
+            <ul>
+              <li>Developed an LLM backend that generates five high-quality questions based on a player's presentation and supporting materials, then delivers audio files to a Unity game.</li>
+              <li>Improved the sLLM (<a href="https://huggingface.co/MLP-KTLim/llama-3-Korean-Bllossom-8B">Bllossom-8B</a>) by combining two PEFT techniques, using a custom training dataset created with GPT.</li>
+              <ul>
+                <li>Soft prompting: Addressed poor instruction following, achieving 100% instruction adherence.</li>
+                <li>LoRA: Improved response quality by approximately 57%.</li>
+              </ul>
+              <li>Established an LLM evaluation framework to assess instruction adherence and response quality.</li>
+            </ul>
+          </ul>
+        </article>
+      </section>
+
+      <section>
+        <h2>Awards</h2>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3>Outstanding Softeer Award</h3>
+              <p class="소속">Softeer Bootcamp</p>
+            </div>
+            <p class="항목-메타정보">
+              <time datetime="2026-08-31">26.08.31</time>
+            </p>
+          </header>
+          <ul>
+            <li>Built a vehicle recommendation dashboard using driving data to increase revenue per customer for a New York taxi leasing company.</li>
+            <li>Built an Airflow data pipeline with layer-specific quality validation based on the medallion architecture. Used GX Core for validation in the bronze and silver layers, and implemented custom validation in the gold layer to accommodate business logic that joins two tables.</li>
+            <li>Implemented idempotency using SHA-256, checksums, fingerprints, and Airflow Assets.</li>
+            <li>Reduced Spark execution time by over 70% by truncating lineage with local checkpoints, specifying broadcast join hints, and optimizing partition counts.</li>
+          </ul>
+        </article>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3>Grand Prize, 14th SWAI Hackathon</h3>
+              <p class="소속">Sejong University</p>
+            </div>
+            <p class="항목-메타정보">
+              <time datetime="2026-06-25">26.06.25</time>
+            </p>
+          </header>
+          <ul>
+            <li>Built a platform for evaluating developers' practical software development skills.</li>
+            <li>Combined five assessment areas into a single real-world development scenario to evaluate AI-assisted development skills.</li>
+                <ul>
+                    <li>Context engineering: Assessed the ability to manage context windows and minimize hallucinations.</li>
+                    <li>Specification writing: Assessed the ability to produce consistent AI implementations through detailed specifications.</li>
+                    <li>Implementation review: Assessed the ability to identify incorrect AI implementations caused by hallucinations or other issues.</li>
+                    <li>Test design: Assessed the ability to identify failure scenarios missing from AI-generated tests and detect incorrect tests.</li>
+                    <li>Development prompting: Assessed the ability to achieve sophisticated results using lower-cost AI models.</li>
+                </ul>
+            <li>Built a rubric-based LLM-as-a-judge evaluation framework to compare models including GPT-5.4/4.0/3.5 and select models for development prompting and LLM-based evaluation.</li>
+          </ul>
+        </article>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3>2nd Place, 10th SW Coding Competition</h3>
+              <p class="소속">Sejong University</p>
+            </div>
+            <p class="항목-메타정보">
+              <time datetime="2025-12-12">25.12.12</time>
+            </p>
+          </header>
+          <ul>
+            <li>Placed second in an on-campus algorithm competition for third- and fourth-year software majors, solving algorithmic problems in Python.</li>
+          </ul>
+        </article>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3>Silver Award, 12th SWAI Hackathon</h3>
+              <p class="소속">Sejong University</p>
+            </div>
+            <p class="항목-메타정보">
+              <time datetime="2025-06-26">25.06.26</time>
+            </p>
+          </header>
+          <ul>
+            <li>Built a startup guidance agent for early-stage founders.</li>
+            <li>Developed a product with a LangGraph-based ReAct agent to support market research, competitor analysis, and idea refinement.</li>
+            <li>Used DuckDuckGo and Google APIs as tools to populate all nine components of a Lean Canvas.</li>
+            <li>Implemented a validation node to evaluate each generated component and trigger regeneration with failure reasons when scores fell below the threshold. Increased execution time by approximately 10%, reduced hallucinations by over 95%, and improved the overall Lean Canvas score by approximately 40% or more.</li>
+          </ul>
+        </article>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3>2nd Place, Spring 2025 AI and Robotics Academic Festival</h3>
+              <p class="소속">Department of AI and Robotics, Sejong University</p>
+            </div>
+            <p class="항목-메타정보">
+              <time datetime="2025-06-24">25.06.24</time>
+            </p>
+          </header>
+          <ul>
+            <li>Built a personalized English conversation learning agent (voicebot).</li>
+            <li>Applied two approaches to provide personalized conversations:</li>
+            <ul>
+              <li>Multi-hop question answering</li>
+              <ul>
+                <li>Found that standard vector database-based RAG could not handle multi-hop questions in real conversations.</li>
+                <li>Researched approaches to multi-hop reasoning, read <a href="https://kingrang-e.tistory.com/38">Microsoft's GraphRAG paper</a>, and applied it to the project.</li>
+                <li>Improved performance by 575% across 25 multi-hop questions (0.16 → 0.92).</li>
+              </ul>
+              <li>Individual conversation preferences</li>
+              <ul>
+                <li>Maintained a separate system prompt for each user to reflect preferred tone and conversation style, initializing the agent with the user's personalized prompt at the start of each conversation.</li>
+                <li>Collected optional conversation ratings (1–5 stars) after each interaction. After accumulating at least five ratings, reverted to a previous system prompt version or refined the prompt.</li>
+              </ul>
+            </ul>
+          </ul>
+        </article>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3>Silver Award, 11th SWAI Hackathon</h3>
+              <p class="소속">Sejong University</p>
+            </div>
+            <p class="항목-메타정보">
+              <time datetime="2024-12-27">24.12.27</time>
+            </p>
+          </header>
+          <ul>
+            <li>Built a Sejong University information chatbot using RAG.</li>
+            <li>Addressed fragmented campus information across <a href="https://www.sejong.ac.kr/kor/index.do">Sejong University's official website</a>, <a href="https://do.sejong.ac.kr/">event pages</a>, <a href="https://udream.sejong.ac.kr/">career pages</a> and other sources.</li>
+            <li>Implemented crawlers using Airflow and Beautiful Soup to load data daily.</li>
+            <li>Prevented duplicate loads using SHA-256 hash checks based on post titles, timestamps, and content, and used UPSERT to reflect updates to existing posts.</li>
+            <li>Precategorized information by source and topic and stored these categories as metadata in ChromaDB, reducing retrieval time by approximately 50% and improving accuracy by approximately 41%.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section>
+        <h2>Education</h2>
+        <ul>
+          <li>
+            <div class="항목-행">
+              <span><strong>Softeer Bootcamp, 8th — DE/DA Track</strong>Advanced training in data engineering (Spark/Hadoop/Airflow) and data architecture (data modeling/standardization).</span>
+              <span class="항목-메타정보"><span class="기간">26.07-26.08</span></span>
+            </div>
+          </li>
+          <li>
+            <div class="항목-행">
+              <span><strong>Sejong University</strong> Smart Device Engineering, School of Intelligent Mechatronics Engineering
+                GPA: 3.86/4.5 (Major GPA: 4.12/4.5)</span>
+                     <ul>
+                       <li>Academic Excellence Scholarship, Spring 2023 — Ranked 3rd of 220 students.</li>
+                     </ul>
+              <span class="항목-메타정보"><span class="기간">20.03-26.08</span></span>
+            </div>
+          </li>
+        </ul>
+      </section>
+       <section>
+        <h2>Publications</h2>
+        <ul>
+          <li>
+            <div class="항목-행">
+              <span><strong><a href="https://koreascience.or.kr/article/JAKO202519950404862.page">Evaluating The Openness of Impactful AI Models with A Focus on LLMs</a></strong></span>
+              <span class="항목-메타정보"><span class="기간">Korea Information Processing Society, TKIPS</span></span>
+            </div>
+          </li>
+          <li>
+            <div class="항목-행">
+              <span><strong><a href="https://koreascience.kr/article/CFKO202520961205222.pub?&lang=ko&orgId=kips">An LLM-Based Agent for Customized Summarization of Educational Materials</a></strong></span>
+              <span class="항목-메타정보"><span class="기간">Undergraduate Research Paper Competition (ASK2025)</span></span>
+            </div>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>Certifications &amp; Languages</h2>
+        <ul>
+          <li>
+            <div class="항목-행">
+              <span><strong>ADsP (Advanced Data Analytics Semi-Professional)</strong></span>
+              <span class="항목-메타정보"><span class="기간">Korea Data Agency (26.08.28)</span></span>
+            </div>
+          </li>
+          <li>
+            <div class="항목-행">
+              <span><strong>TOEIC Speaking — Intermediate High (IH)</strong></span>
+              <span class="항목-메타정보"><span class="기간">Korea TOEIC Committee (26.08.15)</span></span>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </main>
+</body>
+</html>
