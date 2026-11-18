@@ -50,28 +50,28 @@
                 <li>During development: Used agile, feature-level iterations to gather feedback and incorporate it incrementally.</li>
               </ul>
             </li>
-            <li><strong>AI meeting assistant</strong>: Live captions in four languages and meeting minutes for multinational executive meetings across group companies.
+            <li><strong>AI meeting assistant</strong> : Four-language captions and minutes for multinational executive meetings.
               <ul>
-                <li>Separated caption latency and transcript completeness requirements: live captions used a bounded queue that discarded stale audio chunks, while meeting transcription processed the full audio recording.</li>
-                <li>Implemented automatic fallback to pyannote and a local LLM for external speech and LLM API outages, with user notification when local processing was also unavailable.</li>
+                <li><strong>Caption latency/transcript omissions</strong> → Separated bounded-queue captions from full-recording transcription → Addressed live latency and transcript completeness independently</li>
+                <li><strong>External API outages</strong> → Added automatic pyannote/local-LLM fallback → Provided alternative processing and notified users when unavailable</li>
               </ul>
             </li>
-            <li><strong>Orecast</strong>: A purchasing analytics dashboard connecting raw material price collection with lead-lag analysis and ML forecasting.
+            <li><strong>Orecast</strong> : Raw material price analytics and forecasting for purchasing teams.
               <ul>
-                <li>Replaced RPA-based collection with Airflow-orchestrated Python crawlers and standardized material, date, and price records from four public sources, separating site-specific parsers from ingestion logic.</li>
-                <li>Decoupled collection from local database ingestion with Redis Streams to accommodate different server availability; combined ACK after database commit with material/date UPSERTs to prevent duplicate price rows during replay after interruptions.</li>
+                <li><strong>Fragmented RPA collection</strong> → Automated four sources with Airflow/Python → Unified ingestion under a material/date/price record format</li>
+                <li><strong>Local DB downtime/duplicate replay</strong> → Combined Redis Streams buffering with post-commit ACK and UPSERT → Enabled replay after interruptions without duplicate price rows</li>
               </ul>
             </li>
-            <li><strong>SAP2BOM</strong>: Automation that derives actual BOMs from SAP production records for customs duty drawback claims.
+            <li><strong>SAP2BOM</strong> : Actual BOM calculation from SAP production records for duty drawback claims.
               <ul>
-                <li>Topologically sorted multi-level product and intermediate-product dependencies to calculate raw material consumption in order, reducing duty drawback calculation effort from over 30 person-days to 7 person-days or less.</li>
-                <li>Identified Excel startup and termination waits as a bottleneck across more than 200 BOM downloads; separated downloading and Excel cleanup into dedicated threads, reducing execution time by approximately 82% and RAM usage by over 99% for this workflow.</li>
+                <li><strong>Multi-level product dependencies</strong> → Automated consumption calculation in topological order → Reduced effort from over 30 to 7 person-days or less</li>
+                <li><strong>Excel waits across 200+ BOM downloads</strong> → Separated downloading and process cleanup into threads → Reduced workflow runtime by approximately 82% and RAM usage by over 99%</li>
               </ul>
             </li>
-            <li><strong>Job competency assessment CBT</strong>: A web platform connecting assessment authoring, test taking, automated grading, and competency analytics.
+            <li><strong>Job competency assessment CBT</strong> : Internal assessments, automated grading, and competency analytics.
               <ul>
-                <li>Replaced full analytics rebuilds with incremental, idempotent ingestion using per-source watermarks and unique constraints, recalculating only affected users and tags; reduced processing time from 11,174ms to 55.2ms (approximately 202× faster) on roughly 20,000 synthetic facts on a development PC.</li>
-                <li>Moved reference-answer and rubric-based LLM grading to RQ jobs after the submission transaction so model response waits did not delay answer storage; implemented pending, graded, and failed states with total-score updates.</li>
+                <li><strong>Cost of full analytics rebuilds</strong> → Applied incremental ETL with watermarks and unique constraints → 11,174ms → 55.2ms, approximately 202× faster (development PC/~20,000 synthetic facts)</li>
+                <li><strong>Submission delays from LLM waits</strong> → Moved rubric-based grading to post-submission RQ jobs → Separated answer storage from pending/graded/failed grading states</li>
               </ul>
             </li>
           </ul>
@@ -90,37 +90,25 @@
             <em>Solved problems through a research-driven approach of forming and testing hypotheses.</em>
           </p>
           <ul>
-            <li>Developed a model for generating 3D objects from a single image.</li>
-            <ul>
-              <li>Built a pipeline that converts a single image of a person into an animatable 3D object.</li>
-              <li>Improved the azimuth algorithm of the One-2-3-45 model, increasing SSIM by 14% (0.65 → 0.74).</li>
+            <li><strong>Single-image 3D generation</strong> : Animatable 3D objects from portrait images.
               <ul>
-                <li>Addressed poor rear-view prediction by testing the hypothesis that the original 2:1 front-to-rear image ratio (12 images in total) was imbalanced, and that generating more images with a 1:1 ratio would improve predictions.</li>
+                <li><strong>Poor rear-view prediction</strong> → Changed front/rear generation ratio from 2:1 to 1:1 → Improved SSIM from 0.65 to 0.74, approximately 14%</li>
+                <li><strong>Joint-to-mesh alignment</strong> → Integrated MediaPipe joint estimation with bpy → Implemented automatic rigging</li>
               </ul>
-              <li>Developed an auto-rigging algorithm using MediaPipe Body Estimation and the bpy module to locate joint coordinates and connect the mesh to bones.</li>
-            </ul>
-            <li>Developed a diagnostic model for mild cognitive impairment.</li>
-            <ul>
-              <li>Built a model to identify mild cognitive impairment from VR gameplay data.</li>
-              <li>Reviewed gameplay videos of patients and healthy participants to identify differences and form hypotheses, then validated them through exploratory data analysis (EDA).</li>
-              <li>Used validated hypotheses to guide data cleaning, feature engineering, augmentation, and model selection.</li>
+            </li>
+            <li><strong>Mild cognitive impairment detection</strong> : Classification using VR gameplay time series.
               <ul>
-                <li>Data cleaning: Found that patients' data distributions approached those of healthy participants after three or more repeated sessions due to the effects of the digital therapeutic; excluded patient data from sessions beyond the third.</li>
-                <li>Data augmentation: Cleaning left only approximately 200–300 records. Applied sliding-window augmentation using the recurring gameplay patterns validated through hypothesis testing, increasing the dataset size approximately threefold.</li>
-                <li>Feature engineering: Introduced new features based on key differences identified during hypothesis testing, including Z-axis acceleration.</li>
-                <li>Model selection: Selected a Transformer encoder-based classifier to capture relationships across the entire time series and all features, rather than isolated segments.</li>
+                <li><strong>Patient/control distributions converged after repeated therapy</strong> → Confirmed through video review/EDA and excluded patient sessions beyond the third → Cleaned training data</li>
+                <li><strong>Only 200–300 records after cleaning</strong> → Applied sliding-window augmentation using recurring patterns → Expanded data approximately threefold</li>
+                <li><strong>Cross-feature/time-series relationships</strong> → Added features including Z-axis acceleration and a Transformer encoder → Built a classifier over the full time series</li>
               </ul>
-            </ul>
-            <li>Fine-tuned a small language model (sLLM) and developed its backend.</li>
-            <ul>
-              <li>Developed an LLM backend that generates five high-quality questions based on a player's presentation and supporting materials, then delivers audio files to a Unity game.</li>
-              <li>Improved the sLLM (<a href="https://huggingface.co/MLP-KTLim/llama-3-Korean-Bllossom-8B">Bllossom-8B</a>) by combining two PEFT techniques, using a custom training dataset created with GPT.</li>
+            </li>
+            <li><strong>sLLM fine-tuning/backend</strong> : Five presentation-based questions delivered as audio to Unity.
               <ul>
-                <li>Soft prompting: Addressed poor instruction following, achieving 100% instruction adherence.</li>
-                <li>LoRA: Improved response quality by approximately 57%.</li>
+                <li><strong>Poor instruction following</strong> → Applied soft prompts with GPT-generated training data → Achieved 100% instruction adherence</li>
+                <li><strong>Response quality limitations</strong> → Applied LoRA to Bllossom-8B and built an evaluation framework → Improved response quality by approximately 57%</li>
               </ul>
-              <li>Established an LLM evaluation framework to assess instruction adherence and response quality.</li>
-            </ul>
+            </li>
           </ul>
         </article>
       </section>
@@ -139,10 +127,10 @@
           </header>
           <p><strong>A dashboard helping New York taxi leasing companies identify vehicle upgrade prospects using trip data and estimated driver net income.</strong></p>
           <ul>
-            <li>Identified growing Spark execution plans across allocation rounds and truncated lineage with localCheckpoint; maintained identical allocations while reducing runtime from 7.40s to 3.28s (approximately 56%) in a local comparison with 2,000 drivers and three vehicle models.</li>
-            <li>Selectively persisted five reused intermediate results, including enriched trips, driver aggregates, and recommendation candidates, and unpersisted them after use to manage recomputation and memory usage; reduced median computation time from 49.673s to 28.162s (43.3%) in a local comparison over approximately 680,000 trips.</li>
-            <li>Implemented idempotent loading by identifying input file contents and recommendation settings with SHA-256 and combining region/month transaction locks with unique constraints, reusing successful versions for identical inputs and creating new versions only for changed inputs.</li>
-            <li>Used ETag/Last-Modified and internal artifact checks to reprocess only changed or missing inputs; coordinated Airflow to emit one region/month readiness Asset after all selected downstream DAGs succeeded, reducing duplicate Gold runs from individual completion events and computing only after inputs for the same partition were ready.</li>
+            <li><strong>Growing Spark plans</strong> → Truncated per-round lineage with localCheckpoint → 7.40s → 3.28s, approximately 56% faster (local/2,000 drivers/3 models; identical allocations)</li>
+            <li><strong>Repeated intermediate computation</strong> → Persisted only five reused results and unpersisted after use → Median 49.673s → 28.162s, 43.3% faster (local/~680,000 trips)</li>
+            <li><strong>Duplicate loads on reruns</strong> → Combined input/settings SHA-256 with region/month locks and unique constraints → Reused successful versions; loaded only changed inputs as new versions</li>
+            <li><strong>Duplicate Gold triggers</strong> → Checked ETags/artifacts, ran only required DAGs, and emitted one readiness Asset after success → Coordinated region/month inputs to reduce duplicate runs</li>
           </ul>
         </article>
         <article class="항목">
@@ -157,9 +145,9 @@
           </header>
           <p><strong>A platform assessing practical AI-assisted development skills, including instructing AI and verifying generated results.</strong></p>
           <ul>
-            <li>Identified an assessment flaw where meaningless instructions scored approximately 80 because the generator also received the full task brief; restricted generation to candidate instructions while retaining task requirements for the grader so instruction-writing ability influenced generated results and assessment.</li>
-            <li>To reduce variation in numerical LLM grading, limited the model to semantic matching between natural-language review items and reference items; calculated Precision/Recall and severity-weighted scores in code and aggregated across tasks using micro-averages of raw counts.</li>
-            <li>Identified sequential LLM calls for three coverage-consensus judgments and a boundary check as a context-evaluation bottleneck; used ThreadPoolExecutor to parallelize all three judgments and run the boundary check concurrently, preserving judgment counts while reducing a single E2E measurement from 22.1s to 7.4s (approximately 67%).</li>
+            <li><strong>Meaningless instructions scored approximately 80</strong> → Removed task briefs from generation, retaining candidate instructions only → Removed task-information leakage so instruction quality affected generation and grading</li>
+            <li><strong>Variable numerical LLM grading</strong> → Kept semantic matching in the LLM and calculated Precision/Recall/weighted scores in code → Separated deterministic arithmetic and aggregated with micro-averages</li>
+            <li><strong>Wait time from four sequential LLM calls</strong> → Ran three consensus judgments and a boundary check concurrently with ThreadPoolExecutor → Preserved judgment counts; 22.1s → 7.4s, approximately 67% faster (single E2E measurement)</li>
           </ul>
         </article>
         <article class="항목">
@@ -188,9 +176,9 @@
           </header>
           <p><strong>An agent helping early-stage founders turn ideas into Lean Canvases supported by market and competitor research.</strong></p>
           <ul>
-            <li>Decomposed queries into market size, customer problems, and competing alternatives; searched Google and DuckDuckGo in parallel, deduplicated normalized URLs, and reranked titles/snippets with a BGE Cross-Encoder before generation.</li>
-            <li>Built a LangGraph workflow separating facts from hypotheses and validating source presence and token overlap with search snippets; allowed up to two revisions of failed claims, then removed and rechecked claims that still failed.</li>
-            <li>Fixed generated artifacts to separate generation variation from grading variation, measuring repeated-grading variance and error against human labels; recorded winner reversals after swapping A/B order as ties and positional inconsistencies.</li>
+            <li><strong>Fragmented/duplicate research</strong> → Combined Google/DuckDuckGo parallel search with URL normalization and BGE reranking → Provided top evidence for market/customer/competitor queries</li>
+            <li><strong>Unsupported generated claims</strong> → Validated sources/token overlap in LangGraph with up to two revisions → Removed and rechecked failed claims in an evidence-validation workflow</li>
+            <li><strong>Generation variation/position bias</strong> → Repeated grading of fixed outputs with swapped A/B order → Measured human-label error and verdict reversals separately</li>
           </ul>
         </article>
         <article class="항목">
@@ -205,9 +193,9 @@
           </header>
           <p><strong>A personalized AI voicebot that remembers learners’ past conversations and provides English conversation practice and expression correction.</strong></p>
           <ul>
-            <li>Stored conversations as individual messages, combined up-to-3-hop traversal with Korean/English text search, and reranked by relevance, path length, and recency; improved mean evidence Recall from 4.4% to 70.8% in replay over the same 60-question development set.</li>
-            <li>Implemented a transactional outbox that writes conversation records and graph-indexing jobs in one PostgreSQL transaction, with per-conversation ordering, retries, deduplication, and deletion guards for replay after partial updates.</li>
-            <li>Built a 162-item evaluation suite covering memory retrieval, fabricated memories, multi-turn dialogue, and expression correction; compared 162 outputs per version using the same grader while preserving actual model inputs, retrieved evidence, and prompt versions.</li>
+            <li><strong>Missed past-conversation evidence</strong> → Stored message-level memories and reranked 3-hop/Korean-English search results → Mean evidence Recall 4.4% → 70.8% (replay over the same 60-question development set)</li>
+            <li><strong>Partial source/graph updates</strong> → Added a transactional outbox with ordering, retries, and deletion guards → Enabled retries of failed index updates</li>
+            <li><strong>Inconsistent before/after evaluation</strong> → Compared outputs across 162 items using the same grader → Preserved inputs/evidence/prompt versions for traceability</li>
           </ul>
         </article>
         <article class="항목">
@@ -222,9 +210,9 @@
           </header>
           <p><strong>A student-facing RAG chatbot answering questions about academic, career, and extracurricular information across campus sites with official sources.</strong></p>
           <ul>
-            <li>Chunked announcements into body segments of up to 1,600 characters while preserving paragraph/table-row structure, carrying table headers, merged-cell context, titles, and dates into chunks so eligibility conditions remained interpretable after retrieval.</li>
-            <li>Identified chunks by hashes of document metadata and chunk composition plus chunk order; embedded only missing chunks, removed old versions after successful loading, and compared PostgreSQL source records with Chroma indexes to diagnose missing or stale chunks.</li>
-            <li>Restricted generation to sentences and source numbers and assembled URLs from retrieved originals; validated sentence-level citations and skipped generation or withheld answers when retrieval was empty or evidence was insufficient.</li>
+            <li><strong>Table/context loss in chunks</strong> → Used paragraph/table-row chunking up to 1,600 body characters with titles and headers → Retained context for interpreting eligibility conditions</li>
+            <li><strong>Source/index drift and duplicate embedding</strong> → Used hash-based incremental loading and PostgreSQL/Chroma ID comparisons → Diagnosed missing/stale chunks; deleted old versions only after successful loading</li>
+            <li><strong>Invented sources/unsupported answers</strong> → Validated sentence citations and assembled original URLs → Skipped generation on empty retrieval and withheld insufficiently supported answers</li>
           </ul>
         </article>
       </section>
