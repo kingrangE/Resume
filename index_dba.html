@@ -4,15 +4,33 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>전길원 | 통합DBA팀 지원 이력서</title>
-    <meta name="description" content="PostgreSQL 실행계획 분석, 백업·복구 검증, 데이터 적재 자동화 경험을 담은 전길원의 이력서">
+    <meta name="description" content="MariaDB에서 PostgreSQL로 운영 DB 이관, 실행계획 분석, 백업·복구 검증 경험을 담은 전길원의 이력서">
     <meta property="og:title" content="전길원 | 통합DBA팀 지원 이력서">
-    <meta property="og:description" content="PostgreSQL 실행계획 분석, 백업·복구 검증, 데이터 적재 자동화 경험">
+    <meta property="og:description" content="MariaDB에서 PostgreSQL로 운영 DB 이관, 실행계획 분석, 백업·복구 검증 경험">
     <meta property="og:type" content="website">
     <link rel="stylesheet" href="./style.css">
     <style>
       @media print {
+        body {
+          font-size: 14px;
+          line-height: 1.65;
+        }
+
+        h2 {
+          margin-bottom: 16px;
+        }
+
+        .항목 + .항목 {
+          margin-top: 18px;
+          padding-top: 18px;
+        }
+
         #experience {
           break-before: page;
+        }
+
+        [aria-labelledby="awards-title"] .항목 {
+          break-inside: avoid;
         }
       }
     </style>
@@ -27,7 +45,7 @@
           <h1>전길원 <span lang="en">Kilwon Jeon</span></h1>
           <p class="소개-문구">통합DBA팀 지원</p>
         </div>
-        <p class="프로필-요약">PostgreSQL 실행계획을 비교해 조회 병목을 개선하고, 백업을 별도 DB에 복원해 데이터와 미처리 작업이 돌아오는지 확인했습니다. 인턴십에서는 원자재 가격 적재를 자동화하고 사내 평가 시스템의 적재 실패와 데이터 갱신 지연을 확인할 수 있도록 지표와 알람을 구성했습니다.</p>
+        <p class="프로필-요약">EC2에서 운영 중인 서비스의 MariaDB를 PostgreSQL로 이관했습니다. 이관 전후의 데이터 정합성과 역이관을 검증하고, 실행계획을 비교해 조회 병목을 개선했습니다. 별도 프로젝트에서는 PostgreSQL 백업을 테스트 DB에 복원해 대화 원문과 미처리 작업이 보존되는지 확인했습니다.</p>
         <address class="연락처">
           <span><span>전화</span><a href="tel:+821098436764">+82 10-9843-6764</a></span>
           <span><span>이메일</span><a href="mailto:kilwon.jeon00@gmail.com">kilwon.jeon00@gmail.com</a></span>
@@ -41,27 +59,26 @@
         <article class="항목">
           <header class="항목-헤더">
             <div class="항목-표제">
-              <h3><a href="https://github.com/kingrangE/Talky">Talky</a></h3>
-              <p class="소속">영어 회화 서비스 · PostgreSQL 16, Alembic, Neo4j</p>
+              <h3><a href="https://github.com/kingrangE/DCBA">DCBA</a></h3>
+              <p class="소속">CS 문제 풀이·복습 서비스 · MariaDB, PostgreSQL, Docker Compose, AWS EC2</p>
             </div>
           </header>
           <ul>
-            <li><strong>실행계획 분석과 복합 인덱스</strong> — 대화와 턴 각 10만 건의 합성 데이터에서 <code>EXPLAIN (ANALYZE, BUFFERS)</code>로 순차 스캔과 정렬을 확인했습니다. 조회 조건과 정렬 순서에 맞춘 B-tree 복합 인덱스를 추가해 공유 버퍼 접근을 대화 목록 1,646 → 53블록, 대화 턴 조회 6,240 → 205블록으로 줄였습니다. <a href="https://github.com/kingrangE/Talky/commit/eac335ad5778111c0d52e2794cefa71ab58b0d8e">인덱스 커밋</a></li>
-            <li><strong>백업 복원 검증</strong> — <code>pg_dump</code> 백업을 <code>pg_restore</code>로 별도 테스트 DB에 복원해 대화 원문, 미처리 요청, 색인 작업이 보존되는지 확인했습니다. PostgreSQL 원본으로 교체용 Neo4j의 검색 데이터를 재구성하는 절차와 복구 검증 항목을 문서화했습니다. <a href="https://github.com/kingrangE/Talky/commit/c854a674551ed7f11cd41963c66ce2f17b84b514">복구 커밋</a></li>
-            <li><strong>스키마 변경과 롤백</strong> — 인덱스 생성과 Alembic 버전 갱신을 한 트랜잭션으로 묶고 잠금 대기를 5초로 제한했습니다. 두 번째 인덱스 생성이 차단되면 첫 인덱스와 버전 변경도 롤백되는지 검증하고, 차단 세션 확인과 재시도 절차를 문서화했습니다. <a href="https://github.com/kingrangE/Talky/blob/eac335ad5778111c0d52e2794cefa71ab58b0d8e/operations/CONVERSATION_INDEXES.md">운영 문서</a></li>
-            <li><strong>작업 큐의 DB 조회 절감</strong> — PostgreSQL 커밋 알림으로 워커를 깨우고 연결이 끊기면 폴링으로 작업을 확인하도록 구성했습니다. PostgreSQL 16의 빈 큐에서 25초간 실행된 SQL 문을 686회에서 208회로 줄였습니다. <a href="https://github.com/kingrangE/Talky/commit/4cdc6c05b602e95ec1414da6f64175f437670d10">작업 큐 커밋</a></li>
+            <li><strong>운영 DB 이관</strong> — Bash와 GitHub Actions·AWS Systems Manager로 쓰기 중지, MariaDB 백업, PostgreSQL 복사와 내부 점검을 자동화하고 EC2 운영 서비스를 전환했습니다. 7개 테이블의 행 수와 데이터 지문, 4개 시퀀스의 다음 값을 대조했습니다. <a href="https://github.com/kingrangE/DCBA/commit/c94dd9896264242c62aa697d63f3865d38a47e06">전환 커밋</a> · <a href="https://github.com/kingrangE/DCBA/actions/runs/44879401390">전환 워크플로 실행</a></li>
+            <li><strong>역이관 검증</strong> — 격리 환경에서 PostgreSQL 전환 후 추가·삭제된 데이터를 별도 MariaDB로 되옮겨 데이터 지문과 신규 ID 증가를 검증했습니다. PostgreSQL이 새 쓰기를 받기 전후로 복구 절차를 구분했습니다. <a href="https://github.com/kingrangE/DCBA/commit/13a7207f3489d8f4df983d37cdc0554b07df8b3d">이관·복구 커밋</a></li>
+            <li><strong>검색 실행계획 개선</strong> — 흔한 검색어가 GIN 조회에서 대량의 본문을 읽고 정렬하는 병목을 확인했습니다. 최신순 B-tree 탐색을 먼저 수행하고 결과가 부족하면 GIN 조회로 이어지게 해 본문 접근을 9,860행에서 38행으로 줄였습니다(합성 데이터). <a href="https://github.com/kingrangE/DCBA/blob/13a7207f3489d8f4df983d37cdc0554b07df8b3d/docs/postgresql-benchmark.md">벤치마크</a></li>
           </ul>
         </article>
         <article class="항목">
           <header class="항목-헤더">
             <div class="항목-표제">
-              <h3><a href="https://github.com/kingrangE/semo">세모</a></h3>
-              <p class="소속">교내 공지 수집 및 검색 서비스 · PostgreSQL, Docker Compose, Airflow</p>
+              <h3><a href="https://github.com/kingrangE/Talky">Talky</a></h3>
+              <p class="소속">영어 회화 서비스 · PostgreSQL 16, Alembic, Neo4j</p>
             </div>
           </header>
           <ul>
-            <li><strong>PostgreSQL 이전</strong> — SQLite에서 수집 원문을 PostgreSQL JSONB로 옮길 수 있도록 기존 JSON의 가져오기 명령을 만들었습니다. 문서 ID와 해시를 유지하고 Docker Compose 구성과 이전·검증 절차를 정리했습니다. <a href="https://github.com/kingrangE/semo/commit/38d69cad4e698fb30467a0550f2214205354e995">이전 커밋</a></li>
-            <li><strong>정합성 점검</strong> — PostgreSQL 원문에서 계산한 색인 ID와 Chroma의 실제 ID를 대조해 누락과 오래된 항목을 구분하는 점검 명령을 구현했습니다. PostgreSQL advisory lock으로 두 Airflow 작업의 동시 색인을 제어했습니다. <a href="https://github.com/kingrangE/semo/commit/ec59b021e2a03563ea0e604c488db0df3c31e974">점검 커밋</a> · <a href="https://github.com/kingrangE/semo/commit/1ab56179db14b785b3c03afcb400c1d278794263">잠금 커밋</a></li>
+            <li><strong>백업 복원 검증</strong> — <code>pg_dump</code> 백업을 <code>pg_restore</code>로 별도 테스트 DB에 복원해 대화 원문, 미처리 요청, 색인 작업이 보존되는지 확인했습니다. PostgreSQL 원본으로 교체용 Neo4j의 검색 데이터를 재구성하는 절차와 복구 검증 항목을 문서화했습니다. <a href="https://github.com/kingrangE/Talky/commit/c854a674551ed7f11cd41963c66ce2f17b84b514">복구 커밋</a></li>
+            <li><strong>인덱스와 스키마 변경</strong> — <code>EXPLAIN (ANALYZE, BUFFERS)</code>로 대화 턴 조회의 순차 스캔과 정렬을 확인한 뒤 B-tree 복합 인덱스를 추가해 공유 버퍼 접근을 6,240 → 205블록으로 줄였습니다(대화·턴 각 10만 건의 합성 데이터). 잠금으로 두 번째 인덱스 생성이 실패하면 첫 인덱스와 Alembic 버전도 롤백되는지 검증했습니다. <a href="https://github.com/kingrangE/Talky/commit/eac335ad5778111c0d52e2794cefa71ab58b0d8e">인덱스 커밋</a></li>
           </ul>
         </article>
       </section>
@@ -75,12 +92,43 @@
               <p class="소속">솔브레인 AI-TF팀</p>
             </div>
             <p class="항목-메타정보">
-              <span class="기간">2026.03–2026.06</span>
+              <span class="기간">26.03 – 26.06</span><span class="위치">경기도 분당구</span>
             </p>
           </header>
+          <p><em>사내 보안 환경에 맞는 AI 서비스와 STAFF 부서 업무 자동화 프로그램을 개발했습니다.</em></p>
           <ul>
-            <li><strong>Orecast | 원자재 가격 적재 자동화</strong> — Python으로 4개 데이터 소스의 수집을 통합하고 Bash 실행 래퍼를 작성했습니다. Redis Streams에서 PostgreSQL로 자동 적재하도록 연결하고, UPSERT와 DB 커밋 이후 ACK를 적용해 재처리 시 중복 행을 방지했습니다. 마지막 적재 시점을 조회할 수 있게 하고 수동 재실행과 스케줄 등록 절차를 문서화했습니다.</li>
-            <li><strong>직무전문성 평가 CBT | DB 구성과 모니터링</strong> — Docker Compose에 PostgreSQL 16과 헬스체크를 구성했습니다. 개발 중인 평가 집계 파이프라인의 실행 상태, 갱신 지연, 소요 시간을 Prometheus 지표로 노출하고 Grafana 대시보드와 실패·갱신 지연 알람을 구성했습니다.</li>
+            <li>SCM/구매/인재경영팀 등 STAFF 부서 담당자와 협의하며 아래 절차로 업무 진행
+              <ul>
+                <li>개발 전 : 암묵지로 남아 있던 업무 절차 정리 -&gt; 매뉴얼 작성 -&gt; 요구사항 정의 -&gt; 유스케이스 다이어그램 작성</li>
+                <li>개발 : 기능 단위로 구현/피드백을 반복하며 요구사항을 점진적으로 반영</li>
+              </ul>
+            </li>
+            <li><strong>Orecast</strong> : 구매 담당자를 위한 원자재 가격 분석/예측 대시보드
+              <ul>
+                <li><strong>소스별로 분리된 RPA 수집</strong> → Airflow/Python으로 4개 소스 수집 자동화 → 품목/날짜/가격 공통 형식으로 적재 경로 통합</li>
+                <li><strong>로컬 DB 중단/재처리 중복</strong> → Redis Streams 버퍼링과 commit 후 ACK/UPSERT 적용 → 중단 후 재처리 및 중복 가격 행 방지</li>
+                <li>Python 수집 작업의 Bash 실행 래퍼를 작성하고 마지막 적재 시점 조회를 추가했습니다. 수동 재실행과 스케줄 등록 절차를 인수인계 문서에 정리했습니다.</li>
+              </ul>
+            </li>
+            <li><strong>직무전문성 평가 CBT</strong> : 사내 직무 평가/자동 채점/역량 분석 플랫폼
+              <ul>
+                <li><strong>답안 전체 재집계 비용</strong> → watermark/유니크 제약 기반 증분 ETL 적용 → 11,174ms → 55.2ms, 약 202배 단축(개발 PC/합성 약 2만 팩트)</li>
+                <li><strong>LLM 응답 대기로 제출 지연</strong> → 루브릭 기반 채점을 제출 후 RQ 작업으로 분리 → 답안을 먼저 저장하고 채점 대기/완료/실패 상태를 별도 관리</li>
+                <li>Docker Compose에 PostgreSQL 16과 헬스체크를 구성했습니다. 개발 단계의 평가 집계에 Prometheus 지표를 추가하고, 집계 실패와 갱신 지연을 Grafana 대시보드와 알람으로 확인할 수 있도록 구성했습니다.</li>
+              </ul>
+            </li>
+            <li><strong>SAP2BOM</strong> : SAP 생산 실적 기반 관세 환급용 BOM 역산 도구
+              <ul>
+                <li><strong>복잡한 제품/반제품 의존성</strong> → 위상 정렬 기반 투입량 계산 자동화 → 소요량 산출 업무 30Days/Man 이상 → 7Days/Man 이하</li>
+                <li><strong>200개 이상 BOM의 Excel 대기 병목</strong> → 다운로드/프로세스 정리 스레드 분리 → 해당 작업 시간 약 82%, RAM 점유율 99% 이상 감소</li>
+              </ul>
+            </li>
+            <li><strong>회의 AI 비서</strong> : 다국적 임원 회의용 4개 국어 자막/회의록 서비스
+              <ul>
+                <li><strong>자막 지연/전사 누락</strong> → 자막은 bounded queue, 전사는 전체 음성 처리로 분리 → 자막 지연과 회의 기록 누락에 각각 대응</li>
+                <li><strong>외부 API 장애</strong> → pyannote/로컬 LLM 자동 폴백 도입 → 로컬 모델로 대체 처리하고 처리 불가 시 사용자 알림</li>
+              </ul>
+            </li>
           </ul>
         </article>
         <article class="항목">
@@ -90,19 +138,146 @@
               <p class="소속">WHATsLAB</p>
             </div>
             <p class="항목-메타정보">
-              <span class="기간">2023.12–2025.02</span>
+              <span class="기간">23.12 - 25.02</span><span class="위치">서울시 서초구</span>
             </p>
           </header>
-          <p>Python으로 연구 데이터 전처리·증강과 3D 모델의 리깅을 자동화했습니다.</p>
+          <p>
+            <em>연구자의 입장에서 가설을 세우고 검증하는 방식의 업무 방식으로 문제를 해결했습니다.</em>
+          </p>
+          <ul>
+            <li><strong>단일 이미지 기반 3D 생성</strong> : 인물 사진을 움직일 수 있는 3D 오브젝트로 변환
+              <ul>
+                <li><strong>후면 이미지 예측 저하</strong> → 전후면 생성 비율을 2:1 → 1:1로 조정 → SSIM 0.65 → 0.74, 약 14% 개선</li>
+                <li><strong>인물 관절/Mesh 연결</strong> → MediaPipe 관절 추정과 bpy 연동 → 자동 Rigging 파이프라인 구현</li>
+              </ul>
+            </li>
+            <li><strong>경도 인지 장애 진단</strong> : VR 게임 시계열 기반 분류 모델
+              <ul>
+                <li><strong>반복 치료 후 환자/정상 데이터 분포가 유사해짐</strong> → 영상 관찰/EDA로 확인 후 3회 이후 환자 데이터 제외 → 학습 데이터 정제</li>
+                <li><strong>정제 후 데이터가 200~300건으로 감소</strong> → 반복 패턴 기반 Sliding Window 증강 → 데이터 약 3배 확대</li>
+                <li><strong>시점/피처 간 관계를 함께 반영해야 하는 문제</strong> → Z축 가속도 등 피처 추가와 Transformer Encoder 적용 → 전체 시계열을 입력으로 사용하는 분류 모델 구현</li>
+              </ul>
+            </li>
+            <li><strong>sLLM 튜닝/백엔드</strong> : 발표 내용/자료 기반 질문 5개 생성 및 Unity 음성 전달
+              <ul>
+                <li><strong>낮은 지시 이행도</strong> → GPT로 직접 구축한 학습 데이터로 Soft Prompt 적용 → 지시 이행도 100% 달성</li>
+                <li><strong>답변 품질 개선 필요</strong> → Bllossom-8B에 LoRA 적용 및 평가 체계 구축 → 답변 품질 약 57% 향상</li>
+              </ul>
+            </li>
+          </ul>
+        </article>
+      </section>
+
+      <section aria-labelledby="awards-title">
+        <h2 id="awards-title">수상</h2>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3>우수 소프티어</h3>
+              <p class="소속">소프티어 부트캠프</p>
+            </div>
+            <p class="항목-메타정보">
+              <time datetime="2026-08-31">26.08.31</time>
+            </p>
+          </header>
+          <p><strong>뉴욕 택시 리스 업체가 운행 데이터와 기사 예상 순수익을 바탕으로 차량 교체 제안 대상을 찾는 대시보드</strong></p>
+          <ul>
+            <li><strong>Spark 실행 계획 증폭</strong> → localCheckpoint로 라운드별 lineage 단절 → 7.40초 → 3.28초, 약 56% 단축(로컬/기사 2,000명/차량 3종, 배정 결과 동일)</li>
+            <li><strong>중간 결과 반복 계산</strong> → 재사용 결과 5종만 persist하고 사용 후 unpersist → 중앙값 49.673초 → 28.162초, 43.3% 단축(로컬/운행 약 68만 건)</li>
+            <li><strong>재실행 시 중복 적재</strong> → 입력/설정 SHA-256과 지역/월 잠금/유니크 제약 적용 → 동일 입력의 성공 버전 재사용 및 변경 입력만 신규 적재</li>
+            <li><strong>입력별 완료 이벤트로 Gold 중복 실행</strong> → ETag/산출물 확인 후 필요한 DAG만 실행하고 성공 시 Asset 1회 발행 → 지역/월별 입력 준비를 통합해 중복 실행 완화</li>
+          </ul>
+        </article>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3>제 14회 SWAI 해커톤 대상</h3>
+              <p class="소속">세종대학교</p>
+            </div>
+            <p class="항목-메타정보">
+              <time datetime="2026-06-25">26.06.25</time>
+            </p>
+          </header>
+          <p><strong>개발자가 AI에 지시하고 생성 결과를 검증하는 등의 AI 개발 실무 역량을 측정하는 평가 플랫폼</strong></p>
+          <ul>
+            <li><strong>무의미한 지시에도 약 80점 산출</strong> → 생성 입력에서 과제 전문을 제거하고 응시자 지시만 전달 → 지시 작성 역량이 생성/평가에 반영되도록 평가 왜곡 수정</li>
+            <li><strong>LLM이 계산한 점수의 변동</strong> → 의미 매칭만 LLM에 맡기고 Precision/Recall/가중 점수는 코드로 계산 → 고정된 계산식으로 점수를 산출하고 micro-average로 집계</li>
+            <li><strong>LLM 판정 4회의 순차 호출로 인한 대기</strong> → ThreadPoolExecutor로 합의 판정 3회와 경계 검사 동시 실행 → 판정 횟수 유지, 22.1초 → 7.4초로 약 67% 단축(단일 E2E 측정)</li>
+          </ul>
+        </article>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3>제 10회 SW 코딩경시대회 2위</h3>
+              <p class="소속">세종대학교</p>
+            </div>
+            <p class="항목-메타정보">
+              <time datetime="2025-12-12">25.12.12</time>
+            </p>
+          </header>
+          <ul>
+            <li>교내 SW 전공 3-4학년을 대상으로 한 알고리즘 대회에서 Python으로 알고리즘 문제를 해결하며 2등을 달성</li>
+          </ul>
+        </article>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3>제 12회 SWAI 해커톤 은상</h3>
+              <p class="소속">세종대학교</p>
+            </div>
+            <p class="항목-메타정보">
+              <time datetime="2025-06-26">25.06.26</time>
+            </p>
+          </header>
+          <p><strong>초기 창업자의 아이디어를 시장/경쟁사 검색 근거가 연결된 린 캔버스로 구체화하는 에이전트</strong></p>
+          <ul>
+            <li><strong>여러 검색 결과에 분산된 근거와 중복 URL</strong> → Google/DuckDuckGo 병렬 검색과 URL 정규화/BGE 재정렬 → 시장/고객/경쟁 대안별 상위 근거를 생성 입력에 제공</li>
+            <li><strong>근거 없는 생성 문장</strong> → LangGraph에서 출처/토큰 중첩 검증 후 최대 2회 수정 → 검증에 실패한 문장을 제거한 뒤 재검사</li>
+            <li><strong>생성 결과의 변동과 A/B 제시 순서에 따른 채점 편향</strong> → 생성물을 고정해 반복 채점하고 A/B 순서 교환 → 사람 라벨 대비 오차와 판정 반전을 분리 측정</li>
+          </ul>
+        </article>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3>25-1학기 AI로봇학과 학술제 2위</h3>
+              <p class="소속">세종대학교 AI로봇학과</p>
+            </div>
+            <p class="항목-메타정보">
+              <time datetime="2025-06-24">25.06.24</time>
+            </p>
+          </header>
+          <p><strong>학습자의 과거 대화를 기억하며 영어 회화와 표현 교정을 제공하는 개인화 AI 보이스봇</strong></p>
+          <ul>
+            <li><strong>과거 대화의 관련 메시지 검색 누락</strong> → 메시지 단위 저장과 3-hop/한영 검색 후 재정렬 → 평균 근거 Recall 4.4% → 70.8%(동일 개발셋 60문항 재생)</li>
+            <li><strong>대화 원본과 그래프 Index의 갱신 불일치</strong> → Transactional Outbox와 순서/재시도/삭제 차단 적용 → 실패한 Index 갱신을 재처리할 수 있도록 구현</li>
+            <li><strong>개선 전후 평가 조건 불일치</strong> → 162개 항목의 전후 출력을 동일 채점기로 비교 → 입력/검색 근거/프롬프트 버전 보존으로 평가 과정과 결과를 추적할 수 있도록 구현</li>
+          </ul>
+        </article>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3>제 11회 SWAI 해커톤 은상</h3>
+              <p class="소속">세종대학교</p>
+            </div>
+            <p class="항목-메타정보">
+              <time datetime="2024-12-27">24.12.27</time>
+            </p>
+          </header>
+          <p><strong>여러 교내 사이트에 흩어진 학사/취업/비교과 정보를 공식 출처와 함께 안내하는 학생용 RAG 챗봇</strong></p>
+          <ul>
+            <li><strong>Chunk 분할 시 표/문맥 손실</strong> → 문단/표 행 기반 1,600자 Chunking과 제목/표 머리글 보존 → 검색된 Chunk에 신청 조건을 해석하는 데 필요한 문맥 유지</li>
+            <li><strong>원문/Index 불일치와 중복 임베딩</strong> → 해시 기반 증분 적재 및 PostgreSQL/Chroma ID 대조 → 누락/오래된 Chunk 진단, 신규 적재 성공 후 구버전 삭제</li>
+            <li><strong>모델의 출처 URL 생성과 근거 부족 답변</strong> → 문장별 인용 검증과 원문 URL 조립 → 검색 결과가 없으면 생성 생략, 근거 부족 시 답변 보류</li>
+          </ul>
         </article>
       </section>
 
       <section>
-        <h2>교육 및 수상</h2>
+        <h2>교육</h2>
         <ul>
           <li>
             <div class="항목-행">
-              <span><strong>소프티어 부트캠프 8기 DE/DA 과정 · 우수 소프티어</strong>팀 프로젝트 TheOne에서 입력 파일과 설정을 SHA-256으로 식별하고, PostgreSQL 트랜잭션 잠금과 유니크 제약으로 동일 배치의 중복 적재를 방지했습니다. 기존 적재 이력의 백필을 포함한 스키마 변경 SQL을 작성했습니다.</span>
+              <span><strong>소프티어 부트캠프 8기 DE/DA 과정</strong>팀 프로젝트 TheOne에서 입력 파일과 설정을 SHA-256으로 식별하고, PostgreSQL 트랜잭션 잠금과 유니크 제약으로 동일 배치의 중복 적재를 방지했습니다. 기존 적재 이력의 백필을 포함한 스키마 변경 SQL을 작성했습니다.</span>
               <span class="항목-메타정보"><span class="기간">2026.07–2026.08</span></span>
             </div>
           </li>
