@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>전길원 | 통합DBA팀 지원 이력서</title>
+    <meta name="description" content="PostgreSQL 실행계획 분석, 백업·복구 검증, 데이터 적재 자동화 경험을 담은 전길원의 이력서">
+    <meta property="og:title" content="전길원 | 통합DBA팀 지원 이력서">
+    <meta property="og:description" content="PostgreSQL 실행계획 분석, 백업·복구 검증, 데이터 적재 자동화 경험">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="./style.css">
+    <style>
+      @media print {
+        #experience {
+          break-before: page;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="문서-도구">
+        <button type="button" class="PDF-버튼" onclick="window.print()">PDF로 저장</button>
+      </div>
+      <header class="이력서-헤더">
+        <div>
+          <h1>전길원 <span lang="en">Kilwon Jeon</span></h1>
+          <p class="소개-문구">통합DBA팀 지원</p>
+        </div>
+        <p class="프로필-요약">PostgreSQL 실행계획을 비교해 조회 병목을 개선하고, 백업을 별도 DB에 복원해 데이터와 미처리 작업이 돌아오는지 확인했습니다. 인턴십에서는 원자재 가격 적재를 자동화하고 사내 평가 시스템의 적재 실패와 데이터 갱신 지연을 확인할 수 있도록 지표와 알람을 구성했습니다.</p>
+        <address class="연락처">
+          <span><span>전화</span><a href="tel:+821098436764">+82 10-9843-6764</a></span>
+          <span><span>이메일</span><a href="mailto:kilwon.jeon00@gmail.com">kilwon.jeon00@gmail.com</a></span>
+          <span><span>GitHub</span><a href="https://github.com/kingrangE">kingrangE</a></span>
+          <span><span>블로그</span><a href="https://kingrang-e.tistory.com/">티스토리 개발 블로그</a></span>
+        </address>
+      </header>
+
+      <section>
+        <h2>데이터베이스 프로젝트</h2>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3><a href="https://github.com/kingrangE/Talky">Talky</a></h3>
+              <p class="소속">영어 회화 서비스 · PostgreSQL 16, Alembic, Neo4j</p>
+            </div>
+          </header>
+          <ul>
+            <li><strong>실행계획 분석과 복합 인덱스</strong> — 대화와 턴 각 10만 건의 합성 데이터에서 <code>EXPLAIN (ANALYZE, BUFFERS)</code>로 순차 스캔과 정렬을 확인했습니다. 조회 조건과 정렬 순서에 맞춘 B-tree 복합 인덱스를 추가해 공유 버퍼 접근을 대화 목록 1,646 → 53블록, 대화 턴 조회 6,240 → 205블록으로 줄였습니다. <a href="https://github.com/kingrangE/Talky/commit/eac335ad5778111c0d52e2794cefa71ab58b0d8e">인덱스 커밋</a></li>
+            <li><strong>백업 복원 검증</strong> — <code>pg_dump</code> 백업을 <code>pg_restore</code>로 별도 테스트 DB에 복원해 대화 원문, 미처리 요청, 색인 작업이 보존되는지 확인했습니다. PostgreSQL 원본으로 교체용 Neo4j의 검색 데이터를 재구성하는 절차와 복구 검증 항목을 문서화했습니다. <a href="https://github.com/kingrangE/Talky/commit/c854a674551ed7f11cd41963c66ce2f17b84b514">복구 커밋</a></li>
+            <li><strong>스키마 변경과 롤백</strong> — 인덱스 생성과 Alembic 버전 갱신을 한 트랜잭션으로 묶고 잠금 대기를 5초로 제한했습니다. 두 번째 인덱스 생성이 차단되면 첫 인덱스와 버전 변경도 롤백되는지 검증하고, 차단 세션 확인과 재시도 절차를 문서화했습니다. <a href="https://github.com/kingrangE/Talky/blob/eac335ad5778111c0d52e2794cefa71ab58b0d8e/operations/CONVERSATION_INDEXES.md">운영 문서</a></li>
+            <li><strong>작업 큐의 DB 조회 절감</strong> — PostgreSQL 커밋 알림으로 워커를 깨우고 연결이 끊기면 폴링으로 작업을 확인하도록 구성했습니다. PostgreSQL 16의 빈 큐에서 25초간 실행된 SQL 문을 686회에서 208회로 줄였습니다. <a href="https://github.com/kingrangE/Talky/commit/4cdc6c05b602e95ec1414da6f64175f437670d10">작업 큐 커밋</a></li>
+          </ul>
+        </article>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3><a href="https://github.com/kingrangE/semo">세모</a></h3>
+              <p class="소속">교내 공지 수집 및 검색 서비스 · PostgreSQL, Docker Compose, Airflow</p>
+            </div>
+          </header>
+          <ul>
+            <li><strong>PostgreSQL 이전</strong> — SQLite에서 수집 원문을 PostgreSQL JSONB로 옮길 수 있도록 기존 JSON의 가져오기 명령을 만들었습니다. 문서 ID와 해시를 유지하고 Docker Compose 구성과 이전·검증 절차를 정리했습니다. <a href="https://github.com/kingrangE/semo/commit/38d69cad4e698fb30467a0550f2214205354e995">이전 커밋</a></li>
+            <li><strong>정합성 점검</strong> — PostgreSQL 원문에서 계산한 색인 ID와 Chroma의 실제 ID를 대조해 누락과 오래된 항목을 구분하는 점검 명령을 구현했습니다. PostgreSQL advisory lock으로 두 Airflow 작업의 동시 색인을 제어했습니다. <a href="https://github.com/kingrangE/semo/commit/ec59b021e2a03563ea0e604c488db0df3c31e974">점검 커밋</a> · <a href="https://github.com/kingrangE/semo/commit/1ab56179db14b785b3c03afcb400c1d278794263">잠금 커밋</a></li>
+          </ul>
+        </article>
+      </section>
+
+      <section id="experience">
+        <h2>경력</h2>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3>FDE 인턴</h3>
+              <p class="소속">솔브레인 AI-TF팀</p>
+            </div>
+            <p class="항목-메타정보">
+              <span class="기간">2026.03–2026.06</span>
+            </p>
+          </header>
+          <ul>
+            <li><strong>Orecast | 원자재 가격 적재 자동화</strong> — Python으로 4개 데이터 소스의 수집을 통합하고 Bash 실행 래퍼를 작성했습니다. Redis Streams에서 PostgreSQL로 자동 적재하도록 연결하고, UPSERT와 DB 커밋 이후 ACK를 적용해 재처리 시 중복 행을 방지했습니다. 마지막 적재 시점을 조회할 수 있게 하고 수동 재실행과 스케줄 등록 절차를 문서화했습니다.</li>
+            <li><strong>직무전문성 평가 CBT | DB 구성과 모니터링</strong> — Docker Compose에 PostgreSQL 16과 헬스체크를 구성했습니다. 개발 중인 평가 집계 파이프라인의 실행 상태, 갱신 지연, 소요 시간을 Prometheus 지표로 노출하고 Grafana 대시보드와 실패·갱신 지연 알람을 구성했습니다.</li>
+          </ul>
+        </article>
+        <article class="항목">
+          <header class="항목-헤더">
+            <div class="항목-표제">
+              <h3>AI Research Engineer 인턴</h3>
+              <p class="소속">WHATsLAB</p>
+            </div>
+            <p class="항목-메타정보">
+              <span class="기간">2023.12–2025.02</span>
+            </p>
+          </header>
+          <p>Python으로 연구 데이터 전처리·증강과 3D 모델의 리깅을 자동화했습니다.</p>
+        </article>
+      </section>
+
+      <section>
+        <h2>교육 및 수상</h2>
+        <ul>
+          <li>
+            <div class="항목-행">
+              <span><strong>소프티어 부트캠프 8기 DE/DA 과정 · 우수 소프티어</strong>팀 프로젝트 TheOne에서 입력 파일과 설정을 SHA-256으로 식별하고, PostgreSQL 트랜잭션 잠금과 유니크 제약으로 동일 배치의 중복 적재를 방지했습니다. 기존 적재 이력의 백필을 포함한 스키마 변경 SQL을 작성했습니다.</span>
+              <span class="항목-메타정보"><span class="기간">2026.07–2026.08</span></span>
+            </div>
+          </li>
+          <li>
+            <div class="항목-행">
+              <span><strong>세종대학교</strong>지능기전공학부 스마트기기공학전공 · 3.86/4.5 (전공 4.12/4.5)</span>
+              <span class="항목-메타정보"><span class="기간">2020.03–2026.08</span></span>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>자격 및 어학</h2>
+        <ul>
+          <li>
+            <div class="항목-행">
+              <span><strong>ADsP (데이터분석준전문가)</strong></span>
+              <span class="항목-메타정보"><time datetime="2026-08-28">2026.08.28</time></span>
+            </div>
+          </li>
+          <li>
+            <div class="항목-행">
+              <span><strong>TOEIC Speaking IH</strong></span>
+              <span class="항목-메타정보"><time datetime="2026-08-15">2026.08.15</time></span>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
