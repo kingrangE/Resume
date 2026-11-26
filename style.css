@@ -78,6 +78,23 @@ a:focus-visible,
   padding-bottom: 32px;
 }
 
+.프로필 {
+  display: grid;
+  grid-template-columns: min(25%, 120px) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(12px, 3vw, 24px);
+}
+
+.프로필-사진 {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.프로필 .소개-문구 {
+  max-width: none;
+}
+
 h1 {
   font-size: 25px;
   line-height: 1.3;
